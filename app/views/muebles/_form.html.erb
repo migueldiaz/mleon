@@ -1,10 +1,10 @@
-<%= form_for(@pieza) do |f| %>
-  <% if @pieza.errors.any? %>
+<%= form_for(@mueble) do |f| %>
+  <% if @mueble.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@pieza.errors.count, "error") %> prohibited this pieza from being saved:</h2>
+      <h2><%= pluralize(@mueble.errors.count, "error") %> prohibited this mueble from being saved:</h2>
 
       <ul>
-      <% @pieza.errors.full_messages.each do |message| %>
+      <% @mueble.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -14,11 +14,6 @@
   <div class="field">
     <%= f.label :nombre %><br>
     <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :tipo %>
-    <%= f.select :tipo,options_for_select(['Casco','Puerta','Herraje']) %>
-    
   </div>
   <div class="field">
     <%= f.label :descripcion %><br>
@@ -31,6 +26,14 @@
   <div class="field">
     <%= f.label :alto %><br>
     <%= f.number_field :alto %>
+  </div>
+  <div class="field">
+    <%= f.label :fondo %><br>
+    <%= f.number_field :fondo %>
+  </div>
+  <div class="field">
+    <%= f.label :familia %><br>
+    <%= f.text_field :familia %>
   </div>
   <div class="actions">
     <%= f.submit %>

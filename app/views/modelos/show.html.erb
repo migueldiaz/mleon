@@ -50,7 +50,8 @@
   </p>
   <p>
     <%= f.label :pieza_id %><br>
-    <%= f.collection_select(:pieza_id, Pieza.all, :id, :nombre) %>
+    <p><b>**</b>Solo se muestran las piezas de tipo PUERTA y HERRAJE<p>
+    <%= f.collection_select(:pieza_id, Pieza.where("tipo != 'Casco'"), :id, :nombre ) %>
    <!-- <%= f.text_area :pieza_id %>-->
   </p>
    <p>
@@ -67,3 +68,5 @@ Total de piezas<%=@modelo.piezas.count%>
 
 <%= link_to 'Edit', edit_modelo_path(@modelo) %> |
 <%= link_to 'Back', modelos_path %>
+<hr/>
+<%= link_to 'Inicio',root_path%>

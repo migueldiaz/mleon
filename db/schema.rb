@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107161026) do
+ActiveRecord::Schema.define(version: 20150107174346) do
 
   create_table "componentes", force: :cascade do |t|
     t.integer  "modelo_id",  limit: 4
@@ -24,12 +24,30 @@ ActiveRecord::Schema.define(version: 20150107161026) do
   add_index "componentes", ["modelo_id"], name: "index_componentes_on_modelo_id", using: :btree
   add_index "componentes", ["pieza_id"], name: "index_componentes_on_pieza_id", using: :btree
 
+  create_table "familia", force: :cascade do |t|
+    t.string   "nombre",      limit: 255
+    t.text     "descripcion", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "modelos", force: :cascade do |t|
     t.string   "nombre",      limit: 255
     t.text     "descripcion", limit: 65535
     t.integer  "ancho",       limit: 4
     t.integer  "alto",        limit: 4
     t.integer  "fondo",       limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "muebles", force: :cascade do |t|
+    t.string   "nombre",      limit: 255
+    t.text     "descripcion", limit: 65535
+    t.integer  "ancho",       limit: 4
+    t.integer  "alto",        limit: 4
+    t.integer  "fondo",       limit: 4
+    t.string   "familia",     limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @mueble.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @mueble.descripcion %>
+</p>
+
+<p>
+  <strong>Ancho:</strong>
+  <%= @mueble.ancho %>
+</p>
+
+<p>
+  <strong>Alto:</strong>
+  <%= @mueble.alto %>
+</p>
+
+<p>
+  <strong>Fondo:</strong>
+  <%= @mueble.fondo %>
+</p>
+
+<p>
+  <strong>Familia:</strong>
+  <%= @mueble.familia %>
+</p>
+
+<%= link_to 'Edit', edit_mueble_path(@mueble) %> |
+<%= link_to 'Back', muebles_path %>

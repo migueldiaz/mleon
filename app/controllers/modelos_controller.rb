@@ -10,6 +10,7 @@ class ModelosController < ApplicationController
   # GET /modelos/1
   # GET /modelos/1.json
   def show
+    @piezas=Pieza.where(:tipo!='Casco')
   end
 
   # GET /modelos/new

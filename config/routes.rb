@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :familia
+
+  resources :muebles
+
   get 'mleon/inicio'
 
   resources :piezas

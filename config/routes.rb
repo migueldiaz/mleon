@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :familia
+  resources :muebles do
+    resources :componentes
+    resources :modelos
+  end
 
-  resources :muebles
+  resources :clases
 
   get 'mleon/inicio'
 

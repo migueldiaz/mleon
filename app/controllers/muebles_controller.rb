@@ -69,6 +69,6 @@ class MueblesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mueble_params
-      params.require(:mueble).permit(:nombre, :descripcion, :ancho, :alto, :fondo, :familia)
+      params.require(:mueble).permit(:nombre, :descripcion, :ancho, :alto, :fondo, :clase_id)
     end
 end

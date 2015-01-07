@@ -18,7 +18,7 @@ class MueblesControllerTest < ActionController::TestCase
 
   test "should create mueble" do
     assert_difference('Mueble.count') do
-      post :create, mueble: { alto: @mueble.alto, ancho: @mueble.ancho, descripcion: @mueble.descripcion, familia: @mueble.familia, fondo: @mueble.fondo, nombre: @mueble.nombre }
+      post :create, mueble: { alto: @mueble.alto, ancho: @mueble.ancho, clase_id: @mueble.clase_id, descripcion: @mueble.descripcion, fondo: @mueble.fondo, nombre: @mueble.nombre }
     end
 
     assert_redirected_to mueble_path(assigns(:mueble))
@@ -35,7 +35,7 @@ class MueblesControllerTest < ActionController::TestCase
   end
 
   test "should update mueble" do
-    patch :update, id: @mueble, mueble: { alto: @mueble.alto, ancho: @mueble.ancho, descripcion: @mueble.descripcion, familia: @mueble.familia, fondo: @mueble.fondo, nombre: @mueble.nombre }
+    patch :update, id: @mueble, mueble: { alto: @mueble.alto, ancho: @mueble.ancho, clase_id: @mueble.clase_id, descripcion: @mueble.descripcion, fondo: @mueble.fondo, nombre: @mueble.nombre }
     assert_redirected_to mueble_path(assigns(:mueble))
   end
 

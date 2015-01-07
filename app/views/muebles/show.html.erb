@@ -26,9 +26,46 @@
 </p>
 
 <p>
-  <strong>Familia:</strong>
-  <%= @mueble.familia %>
+  <strong>Clase:</strong>
+  <%= @mueble.clase.nombre %>
 </p>
+
+<hr/>
+<h3>Componentes:</h3>
+<p><b>**</b>Únicamente se emplean piezas del tipo casco:</p>
+<!--Usar un render aquí-->
+<!-- Mostramos los componetes del modelo-->
+<table border='1'>
+<tr><th>Modelo:</th><td><%= @mueble.nombre %></td></tr>
+<tr><th>Pieza</th><td>Cantidad</td></tr>
+<% @mueble.componentes.each do |componente| %>
+<tr><td><%= componente.pieza.nombre %></td><td><%= componente.cantidad %></td></tr>
+  
+<% end %>
+<table>
+<!--Añadimos los componetens de este modelo...-->
+<h2>Añade componentes al mueble:</h2>
+<%= form_for([@mueble, @mueble.componentes.build]) do |f| %>
+  <p>
+    <%= f.label :mueble_id %><br>
+    <%= f.hidden_field :mueble_id %>
+  </p>
+  <p>
+    <%= f.label :pieza_id %><br>
+    <p><b>**</b>Solo se muestran las piezas de tipo CASCO <p>
+    <%= f.collection_select(:pieza_id, Pieza.where("tipo = 'Casco'"), :id, :nombre ) %>
+   <!-- <%= f.text_area :pieza_id %>-->
+  </p>
+   <p>
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+</hr>
 
 <%= link_to 'Edit', edit_mueble_path(@mueble) %> |
 <%= link_to 'Back', muebles_path %>

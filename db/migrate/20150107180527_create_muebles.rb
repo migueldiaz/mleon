@@ -6,9 +6,10 @@ class CreateMuebles < ActiveRecord::Migration
       t.integer :ancho
       t.integer :alto
       t.integer :fondo
-      t.string :familia
+      t.references :clase, index: true
 
       t.timestamps null: false
     end
+    add_foreign_key :muebles, :clases
   end
 end

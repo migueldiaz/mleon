@@ -1,6 +1,6 @@
-class CreateFamilia < ActiveRecord::Migration
+class CreateClases < ActiveRecord::Migration
   def change
-    create_table :familia do |t|
+    create_table :clases do |t|
       t.string :nombre
       t.text :descripcion
 

@@ -32,8 +32,8 @@
     <%= f.number_field :fondo %>
   </div>
   <div class="field">
-    <%= f.label :familia %><br>
-    <%= f.text_field :familia %>
+    <%= f.label :clase_id %><br>
+    <%= f.collection_select(:clase_id, Clase.all, :id, :nombre,:prompt=>'Sin categoría' ) %>
   </div>
   <div class="actions">
     <%= f.submit %>

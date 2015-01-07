@@ -1,0 +1,37 @@
+<%= form_for(@modelo) do |f| %>
+  <% if @modelo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@modelo.errors.count, "error") %> prohibited this modelo from being saved:</h2>
+
+      <ul>
+      <% @modelo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_area :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :ancho %><br>
+    <%= f.number_field :ancho %>
+  </div>
+  <div class="field">
+    <%= f.label :alto %><br>
+    <%= f.number_field :alto %>
+  </div>
+  <div class="field">
+    <%= f.label :fondo %><br>
+    <%= f.number_field :fondo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

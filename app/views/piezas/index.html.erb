@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Piezas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Descripcion</th>
+      <th>Ancho</th>
+      <th>Alto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @piezas.each do |pieza| %>
+      <tr>
+        <td><%= pieza.nombre %></td>
+        <td><%= pieza.tipo %></td>
+        <td><%= pieza.descripcion %></td>
+        <td><%= pieza.ancho %></td>
+        <td><%= pieza.alto %></td>
+        <td><%= link_to 'Show', pieza %></td>
+        <td><%= link_to 'Edit', edit_pieza_path(pieza) %></td>
+        <td><%= link_to 'Destroy', pieza, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pieza', new_pieza_path %>

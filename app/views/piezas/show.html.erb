@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @pieza.nombre %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @pieza.tipo %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @pieza.descripcion %>
+</p>
+
+<p>
+  <strong>Ancho:</strong>
+  <%= @pieza.ancho %>
+</p>
+
+<p>
+  <strong>Alto:</strong>
+  <%= @pieza.alto %>
+</p>
+
+<%= link_to 'Edit', edit_pieza_path(@pieza) %> |
+<%= link_to 'Back', piezas_path %>

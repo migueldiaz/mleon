@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @modelo.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @modelo.descripcion %>
+</p>
+
+<p>
+  <strong>Ancho:</strong>
+  <%= @modelo.ancho %>
+</p>
+
+<p>
+  <strong>Alto:</strong>
+  <%= @modelo.alto %>
+</p>
+
+<p>
+  <strong>Fondo:</strong>
+  <%= @modelo.fondo %>
+</p>
+<!-- Mostramos los componetes del modelo-->
+<h2>Componentes</h2>
+<% @modelo.componentes.each do |componente| %>
+  <p>
+    <strong>Modelo:</strong>
+    <%= componente.modelo.nombre %>
+  </p>
+ 
+  <p>
+    <strong>Pieza:</strong>
+    <%= componente.pieza.nombre %>
+  </p>
+  <p>
+    <strong>Cantidad:</strong>
+    <%= componente.cantidad %>
+  </p>
+<% end %>
+<!--Añadimos los componetens de este modelo...-->
+<h2>Añade componentes al modelo:</h2>
+<%= form_for([@modelo, @modelo.componentes.build]) do |f| %>
+  <p>
+    <%= f.label :modelo_id %><br>
+    <%= f.hidden_field :modelo_id %>
+  </p>
+  <p>
+    <%= f.label :pieza_id %><br>
+    <%= f.collection_select(:pieza_id, Pieza.all, :id, :nombre) %>
+   <!-- <%= f.text_area :pieza_id %>-->
+  </p>
+   <p>
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<h3>Piezas</h3>
+Total de piezas<%=@modelo.piezas.count%>
+
+<%= link_to 'Edit', edit_modelo_path(@modelo) %> |
+<%= link_to 'Back', modelos_path %>

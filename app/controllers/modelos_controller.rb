@@ -62,9 +62,11 @@ class ModelosController < ApplicationController
   # DELETE /modelos/1
   # DELETE /modelos/1.json
   def destroy
+    @mueble=@modelo.mueble
     @modelo.destroy
+
     respond_to do |format|
-      format.html { redirect_to modelos_url, notice: 'Modelo was successfully destroyed.' }
+      format.html { redirect_to mueble_modelos_path(@mueble), notice: 'Modelo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -10,6 +10,13 @@ class ComponentesController < ApplicationController
     		redirect_to mueble_path(@mueble)
     	end
   end
+
+  def destroy
+    @mueble = Mueble.find(params[:mueble_id])
+    @componente = @mueble.componentes.find(params[:id])
+    @componente.destroy
+    redirect_to mueble_path(@mueble)
+  end
  
   private
     def componente_params

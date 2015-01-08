@@ -1,37 +1,52 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Mueble -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
 
-<h1>Listing Muebles</h1>
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+  <li class="active"><%=link_to 'Muebles',muebles_path%></li>
+  <li><%=link_to 'Listado',muebles_path%></li>
+</ul>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Descripcion</th>
-      <th>Ancho</th>
-      <th>Alto</th>
-      <th>Fondo</th>
-      <th>Clase</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nombre) %></th>
+      <th><%= model_class.human_attribute_name(:descripcion) %></th>
+      <th><%= model_class.human_attribute_name(:ancho) %></th>
+      <th><%= model_class.human_attribute_name(:alto) %></th>
+      <th><%= model_class.human_attribute_name(:fondo) %></th>
+      <th><%= model_class.human_attribute_name(:clase_id) %></th>
+      <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @muebles.each do |mueble| %>
       <tr>
-        <td><%= mueble.nombre %></td>
+        <td><%= link_to mueble.id, mueble_path(mueble) %></td>
+        <td><%= link_to mueble.nombre, mueble_path(mueble) %></td>
         <td><%= mueble.descripcion %></td>
         <td><%= mueble.ancho %></td>
         <td><%= mueble.alto %></td>
         <td><%= mueble.fondo %></td>
-        <td><%= mueble.clase.nombre %></td>
-        <td><%= link_to 'Show', mueble %></td>
-        <td><%= link_to 'Edit', edit_mueble_path(mueble) %></td>
-        <td><%= link_to 'Destroy', mueble, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= mueble.clase_id %></td>
+       <!-- <td><%=l mueble.created_at %></td>-->
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_mueble_path(mueble), :class => 'btn btn-primary btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      mueble_path(mueble),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-danger btn-xs' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Mueble', new_mueble_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_mueble_path,
+            :class => 'btn btn-primary' %>

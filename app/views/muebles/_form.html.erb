@@ -1,41 +1,33 @@
-<%= form_for(@mueble) do |f| %>
-  <% if @mueble.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@mueble.errors.count, "error") %> prohibited this mueble from being saved:</h2>
+<%= form_for @mueble, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :nombre, :class => 'control-label' %>
+    <%= f.text_field :nombre, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :descripcion, :class => 'control-label' %>
+    <%= f.text_area :descripcion, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :ancho, :class => 'control-label' %>
+    <%= f.number_field :ancho, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alto, :class => 'control-label' %>
+    <%= f.number_field :alto, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :fondo, :class => 'control-label' %>
+    <%= f.number_field :fondo, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Categoría, :class => 'control-label' %>
+    <!--<%= f.number_field :clase_id, :class => 'form-control' %>-->
+     <%= f.collection_select:clase_id, Clase.all, :id,:nombre, {prompt: "Elige una categoría"}, {class: "form-control"}  %>
+  </div>
 
-      <ul>
-      <% @mueble.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :ancho %><br>
-    <%= f.number_field :ancho %>
-  </div>
-  <div class="field">
-    <%= f.label :alto %><br>
-    <%= f.number_field :alto %>
-  </div>
-  <div class="field">
-    <%= f.label :fondo %><br>
-    <%= f.number_field :fondo %>
-  </div>
-  <div class="field">
-    <%= f.label :clase_id %><br>
-    <%= f.collection_select(:clase_id, Clase.all, :id, :nombre,:prompt=>'Sin categoría' ) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                muebles_path, :class => 'btn' %>
   </div>
 <% end %>

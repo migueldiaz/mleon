@@ -1,6 +1,7 @@
+<h1>Mueble:<%=@mueble.nombre%><h1>
 <h1>Editing Modelo</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @modelo %> |
-<%= link_to 'Back', modelos_path %>
+<%= link_to 'Back', mueble_modelos_path(@modelo.mueble) %>

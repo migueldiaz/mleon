@@ -1,4 +1,5 @@
-<%= form_for(@modelo) do |f| %>
+<%= form_for([@mueble, @mueble.modelos.build]) do |f| %>
+
   <% if @modelo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@modelo.errors.count, "error") %> prohibited this modelo from being saved:</h2>
@@ -10,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%=f.hidden_field :mueble_id,:value=>@mueble.id%>
   <div class="field">
     <%= f.label :nombre %><br>
     <%= f.text_field :nombre %>
@@ -19,6 +20,7 @@
     <%= f.label :descripcion %><br>
     <%= f.text_area :descripcion %>
   </div>
+  <!-- Estos campos no se usan .. son los mismos valores que el mueble base
   <div class="field">
     <%= f.label :ancho %><br>
     <%= f.number_field :ancho %>
@@ -30,7 +32,7 @@
   <div class="field">
     <%= f.label :fondo %><br>
     <%= f.number_field :fondo %>
-  </div>
+  </div> -->
   <div class="actions">
     <%= f.submit %>
   </div>

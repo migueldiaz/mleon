@@ -4,7 +4,8 @@ class ModelosController < ApplicationController
   # GET /modelos
   # GET /modelos.json
   def index
-    @modelos = Modelo.all
+    @mueble=Mueble.find(params[:mueble_id])
+    @modelos = @mueble.modelos
   end
 
   # GET /modelos/1
@@ -15,17 +16,23 @@ class ModelosController < ApplicationController
 
   # GET /modelos/new
   def new
-    @modelo = Modelo.new
+    @mueble=Mueble.find(params[:mueble_id])
+    @modelo = @mueble.modelos.new
   end
 
   # GET /modelos/1/edit
   def edit
+    @mueble=@modelo.mueble
   end
 
   # POST /modelos
   # POST /modelos.json
   def create
-    @modelo = Modelo.new(modelo_params)
+    @mueble=Mueble.find(params[:mueble_id])
+    @modelo=@mueble.modelos.create(modelo_params)
+     #   redirect_to modelo_path(@modelo)
+
+    #@modelo = Modelo.new(modelo_params)
 
     respond_to do |format|
       if @modelo.save
@@ -70,6 +77,6 @@ class ModelosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def modelo_params
-      params.require(:modelo).permit(:nombre, :descripcion, :ancho, :alto, :fondo)
+      params.require(:modelo).permit(:nombre, :descripcion, :ancho, :alto, :fondo,:mueble_id)
     end
 end

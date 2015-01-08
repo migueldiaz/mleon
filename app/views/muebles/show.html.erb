@@ -29,9 +29,23 @@
   <strong>Clase:</strong>
   <%= @mueble.clase.nombre %>
 </p>
-
+<!--Añadimos los modelos al mueble-->
 <hr/>
-<h3>Componentes:</h3>
+<h3>Modelos:</h3>
+<!--<p><b>**</b>Únicamente se emplean piezas del tipo casco:</p>-->
+<!--Usar un render aquí-->
+<!-- Mostramos los componetes del modelo-->
+<table border='1'>
+<tr><th>Mueble:</th><td><%= @mueble.nombre %></td></tr>
+<tr><th>Modelo</th></tr>
+<% @mueble.modelos.each do |modelo| %>
+<tr><td><%= modelo.nombre %></td><td><%=link_to 'Ver detalles',modelo_path(modelo)%></td></tr>
+  
+<% end %>
+<table>
+<!-- FIn modelos -->
+<hr/>
+<h3>Piezas:</h3>
 <p><b>**</b>Únicamente se emplean piezas del tipo casco:</p>
 <!--Usar un render aquí-->
 <!-- Mostramos los componetes del modelo-->
@@ -47,11 +61,11 @@
 <h2>Añade componentes al mueble:</h2>
 <%= form_for([@mueble, @mueble.componentes.build]) do |f| %>
   <p>
-    <%= f.label :mueble_id %><br>
+    <!--<%= f.label :mueble_id %><br>-->
     <%= f.hidden_field :mueble_id %>
   </p>
   <p>
-    <%= f.label :pieza_id %><br>
+   <!-- <%= f.label :pieza_id %><br>-->
     <p><b>**</b>Solo se muestran las piezas de tipo CASCO <p>
     <%= f.collection_select(:pieza_id, Pieza.where("tipo = 'Casco'"), :id, :nombre ) %>
    <!-- <%= f.text_area :pieza_id %>-->

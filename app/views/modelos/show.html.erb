@@ -1,3 +1,5 @@
+<h1>Mueble:<%=@modelo.mueble.nombre%><h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -25,22 +27,19 @@
   <%= @modelo.fondo %>
 </p>
 <!-- Mostramos los componetes del modelo-->
-<h2>Componentes</h2>
+<hr/>
+<h3>Componentes:</h3>
+<p><b>**</b>Únicamente se emplean piezas del tipo casco herraje y puerta</p>
+<!--Usar un render aquí-->
+<!-- Mostramos los componetes del modelo-->
+<table border='1'>
+<tr><th>Modelo:</th><td><%= @modelo.nombre %></td></tr>
+<tr><th>Pieza</th><td>Cantidad</td></tr>
 <% @modelo.componentes.each do |componente| %>
-  <p>
-    <strong>Modelo:</strong>
-    <%= componente.modelo.nombre %>
-  </p>
- 
-  <p>
-    <strong>Pieza:</strong>
-    <%= componente.pieza.nombre %>
-  </p>
-  <p>
-    <strong>Cantidad:</strong>
-    <%= componente.cantidad %>
-  </p>
+<tr><td><%= componente.pieza.nombre %></td><td><%= componente.cantidad %></td></tr>
+  
 <% end %>
+<table>
 <!--Añadimos los componetens de este modelo...-->
 <h2>Añade componentes al modelo:</h2>
 <%= form_for([@modelo, @modelo.componentes.build]) do |f| %>
@@ -67,6 +66,6 @@
 Total de piezas<%=@modelo.piezas.count%>
 
 <%= link_to 'Edit', edit_modelo_path(@modelo) %> |
-<%= link_to 'Back', modelos_path %>
+<%= link_to 'Back', mueble_modelos_path(@modelo.mueble) %>
 <hr/>
 <%= link_to 'Inicio',root_path%>

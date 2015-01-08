@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Mueble: <%=@mueble.nombre%></h1>
 <h1>Listing Modelos</h1>
 
 <table>
@@ -32,4 +32,6 @@
 
 <br>
 
-<%= link_to 'New Modelo', new_modelo_path %>
+<%= link_to 'New Modelo', new_modelo_path(:mueble_id=>params[:mueble_id]) %>
+<hr/>
+<%=link_to 'Mueble',@mueble%>

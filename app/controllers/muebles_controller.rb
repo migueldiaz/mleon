@@ -4,7 +4,7 @@ class MueblesController < ApplicationController
   # GET /muebles
   # GET /muebles.json
   def index
-    @muebles = Mueble.all
+    @muebles = Mueble.all.paginate(:page =>  params[:page], :per_page => 10)
   end
 
   # GET /muebles/1
@@ -25,10 +25,15 @@ class MueblesController < ApplicationController
   # POST /muebles.json
   def create
     @mueble = Mueble.new(mueble_params)
+    
 
     respond_to do |format|
       if @mueble.save
-        format.html { redirect_to @mueble, notice: 'Mueble was successfully created.' }
+        @modelo = @mueble.modelos.new
+        @modelo.nombre = 'Base'
+        @modelo.descripcion= 'Este modelo usa las mismas piezas que el mueble al que pertenece, se crea automáticamente al crear el mueble' 
+        @modelo.save
+        format.html { redirect_to @mueble, notice: 'Se ha creado el mueble correctamente' }
         format.json { render :show, status: :created, location: @mueble }
       else
         format.html { render :new }

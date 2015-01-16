@@ -1,37 +1,38 @@
-<%- model_class = Mueble -%>
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+    <li><%=link_to 'Inicio',muebles_path%></li>
+  <li class="active">Muebles</li>
+</ul>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1>Muebles <%= link_to 'Añadir un mueble',
+            new_mueble_path,
+            :class => 'btn btn-primary pull-right' %></h1>
 </div>
 
-<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
-  <li class="active"><%=link_to 'Muebles',muebles_path%></li>
-  <li><%=link_to 'Listado',muebles_path%></li>
-</ul>
+
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:nombre) %></th>
-      <th><%= model_class.human_attribute_name(:descripcion) %></th>
-      <th><%= model_class.human_attribute_name(:ancho) %></th>
-      <th><%= model_class.human_attribute_name(:alto) %></th>
-      <th><%= model_class.human_attribute_name(:fondo) %></th>
-      <th><%= model_class.human_attribute_name(:clase_id) %></th>
-      <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>Nombre</th>
+      <th>Ancho</th>
+      <th>Alto</th>
+      <th>Fondo</th>
+      <th>Modelos</th>
+      <th>Tipo</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <% @muebles.each do |mueble| %>
       <tr>
-        <td><%= link_to mueble.id, mueble_path(mueble) %></td>
-        <td><%= link_to mueble.nombre, mueble_path(mueble) %></td>
-        <td><%= mueble.descripcion %></td>
+        <td width="200"><%= link_to mueble.nombre, mueble_path(mueble) %></td>
         <td><%= mueble.ancho %></td>
         <td><%= mueble.alto %></td>
         <td><%= mueble.fondo %></td>
-        <td><%= mueble.clase_id %></td>
+        <td><span class="badge"><%=mueble.modelos.count%></span>&nbsp;&nbsp;<%= link_to 'Ver',mueble_modelos_path(mueble)%></td>
+        <td><%= mueble.clase.nombre %></td>
+        <td><%= mueble.descripcion %></td>
        <!-- <td><%=l mueble.created_at %></td>-->
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -46,7 +47,4 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_mueble_path,
-            :class => 'btn btn-primary' %>
+<%= will_paginate @muebles, renderer: BootstrapPagination::Rails %>

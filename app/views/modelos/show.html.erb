@@ -1,71 +1,64 @@
-<h1>Mueble:<%=@modelo.mueble.nombre%><h1>
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+    <li><%=link_to 'Inicio',root_path%></li>
 
-<p id="notice"><%= notice %></p>
+    <%if params[:controller]=='modelo'%>
+    <li><%=link_to 'Modelos',modelos_path%></li>
+    
+    <%elsif params[:controller] =='mueble' || params[:mueble_id]%>
+       <li><%=link_to @mueble.nombre,muebles_path(@mueble)%></li>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @modelo.nombre %>
-</p>
+    <%end%>
+  <li class="active"><%=@modelo.nombre%></li>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @modelo.descripcion %>
-</p>
 
-<p>
-  <strong>Ancho:</strong>
-  <%= @modelo.ancho %>
-</p>
+</ul>
+  <%=params[:controller]   %>
+  <%=params[:mueble_id]%>
 
-<p>
-  <strong>Alto:</strong>
-  <%= @modelo.alto %>
-</p>
 
-<p>
-  <strong>Fondo:</strong>
-  <%= @modelo.fondo %>
-</p>
-<!-- Mostramos los componetes del modelo-->
-<hr/>
-<h3>Componentes:</h3>
-<p><b>**</b>Únicamente se emplean piezas del tipo casco herraje y puerta</p>
-<!--Usar un render aquí-->
-<!-- Mostramos los componetes del modelo-->
-<table border='1'>
-<tr><th>Modelo:</th><td><%= @modelo.nombre %></td></tr>
-<tr><th>Pieza</th><td>Cantidad</td></tr>
-<% @modelo.componentes.each do |componente| %>
-<tr><td><%= componente.pieza.nombre %></td><td><%= componente.cantidad %></td></tr>
+<%- model_class = Modelo -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Nombre del modelo: <%= @modelo.nombre %></h3>
+  </div>
+  <div class="panel-body">
+      <dl class="dl-horizontal">
+      <dt>Código:</strong></dt>
+      <dd><%= @modelo.codigo %></dd>
+      <dt><strong>Mueble base: </strong></dt>
+      <dd><%= link_to @modelo.mueble.nombre,mueble_path(@modelo.mueble) %></dd>
+      <dt>Piezas del modelo base:</strong></dt>
+      <dd> <span class="badge"><%= @modelo.mueble.piezas.count %></span></dd>
+      <dt>Total de iezas del modelo base:</strong></dt>
+      <dd> <span class="badge"><%= @modelo.mueble.componentes.sum('cantidad') %></span></dd>
+      <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
+      <dd><%= @modelo.descripcion %></dd>
+      <dt>Alto</dt>
+      <dd><%= @modelo.mueble.alto %></dd>
+      <dt>Ancho</dt>
+      <dd><%= @modelo.mueble.ancho %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:fondo) %>:</strong></dt>
+      <dd><%= @modelo.mueble.fondo %></dd>
+      
+</dl>
+  </div>
+</div>
+
+
+
+<div class="form-actions">
   
-<% end %>
-<table>
-<!--Añadimos los componetens de este modelo...-->
-<h2>Añade componentes al modelo:</h2>
-<%= form_for([@modelo, @modelo.componentes.build]) do |f| %>
-  <p>
-    <%= f.label :modelo_id %><br>
-    <%= f.hidden_field :modelo_id %>
-  </p>
-  <p>
-    <%= f.label :pieza_id %><br>
-    <p><b>**</b>Solo se muestran las piezas de tipo PUERTA y HERRAJE<p>
-    <%= f.collection_select(:pieza_id, Pieza.where("tipo != 'Casco'"), :id, :nombre ) %>
-   <!-- <%= f.text_area :pieza_id %>-->
-  </p>
-   <p>
-    <%= f.label :cantidad %><br>
-    <%= f.number_field :cantidad %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<h3>Piezas</h3>
-Total de piezas<%=@modelo.piezas.count%>
-
-<%= link_to 'Edit', edit_modelo_path(@modelo) %> |
-<%= link_to 'Back', mueble_modelos_path(@modelo.mueble) %>
-<hr/>
-<%= link_to 'Inicio',root_path%>
+  <%= link_to 'Editar',
+              edit_modelo_path(@modelo), :class => 'btn btn-primary' %>
+  <%= link_to 'Borrar',
+              modelo_path(@modelo),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+  
+</div>

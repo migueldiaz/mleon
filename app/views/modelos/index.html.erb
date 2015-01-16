@@ -1,37 +1,64 @@
-<p id="notice"><%= notice %></p>
-<h1>Mueble: <%=@mueble.nombre%></h1>
-<h1>Listing Modelos</h1>
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+    <li><%=link_to 'Inicio',root_path%></li>
+    <%if params[:controller]== 'mueble'%>
+       <li><%=link_to 'Muebles',muebles_path%></li>
+    <%elsif params[:controller]== 'modelo'%>
+       <li><%=link_to 'Modelos',modelos_path%></li>
+    <%end%>
+    <%if params[:mueble_id]%>
+       <li><%=link_to @mueble.nombre,muebles_path(@mueble)%></li>
+    <%end%>
+  <li class="active">Modelos</li>
+</ul>
 
-<table>
+
+
+<div class="page-header">
+  <h1>Modelos
+      <%if params[:mueble_id]%>
+      <%=link_to 'Crear un modelo',new_modelo_path(:mueble_id=>params[:mueble_id]), :class => 'btn btn-primary pull-right'%>
+      <%else%>
+      <%= link_to 'Crear un modelo',new_modelo_path, :class => 'btn btn-primary pull-right' %>
+<%end%>
+
+  </h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Descripcion</th>
-      <th>Ancho</th>
+      <th>Código</th>
+      <th>Mueble - Modelo</th>
       <th>Alto</th>
+      <th>Ancho</th>
       <th>Fondo</th>
-      <th colspan="3"></th>
+      <th>Descripción</th>
+      <th>Acciones</th>
     </tr>
   </thead>
-
   <tbody>
     <% @modelos.each do |modelo| %>
       <tr>
-        <td><%= modelo.nombre %></td>
-        <td><%= modelo.descripcion %></td>
-        <td><%= modelo.ancho %></td>
-        <td><%= modelo.alto %></td>
-        <td><%= modelo.fondo %></td>
-        <td><%= link_to 'Show', modelo %></td>
-        <td><%= link_to 'Edit', edit_modelo_path(modelo) %></td>
-        <td><%= link_to 'Destroy', modelo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= modelo.codigo %></td>
+        <td width="300"><%=link_to modelo.mueble.nombre,mueble_path(modelo.mueble)%> - <%=link_to modelo.nombre,modelo_path(modelo)%></td>
+       
+        <td><%= modelo.mueble.ancho %></td>
+        <td><%= modelo.mueble.alto %></td>
+        <td><%= modelo.mueble.fondo %></td>
+         <td><%= modelo.descripcion %></td>
+         <td width="100">
+              <div class="btn-group">
+                <a href="<%=modelo_path(modelo)%>" class="btn btn-primary">Ver</a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_modelo_path(modelo)%>">Editar</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Eliminar',:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-danger btn-xs' %></li>
+                </ul>
+            </div>
+         </td>
+    
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Modelo', new_modelo_path(:mueble_id=>params[:mueble_id]) %>
-<hr/>
-<%=link_to 'Mueble',@mueble%>

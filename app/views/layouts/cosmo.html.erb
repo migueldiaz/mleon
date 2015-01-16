@@ -40,8 +40,9 @@
             <!--<li class="active"><a href="#">Home</a></li>-->
              <li><%=link_to 'Inicio',root_path,:class=>'active'%></li>
             <li><a href="#pedidos">Pedidos</a></li>
-            <li><a href="#pedidos">Clientes</a></li>
-            <li><%=link_to 'Muebles',muebles_path,:class=>''%></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li class='active'><%=link_to 'Muebles',muebles_path,:class=>''%></li>
+            <li><a href="<%=modelos_path%>">Modelos <span class="badge"><%=Modelo.all.count%></span></a></li>
             <li><%=link_to 'Familias',clases_path,:class=>''%></li>
             <li><%=link_to 'Piezas',piezas_path,:class=>''%></li>
             <li><a href="#contact">Contact</a></li>

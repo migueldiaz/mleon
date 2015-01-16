@@ -1,39 +1,46 @@
-<%= form_for([@mueble, @mueble.modelos.build]) do |f| %>
+<%= form_for @modelo, :html => { :class => 'form-horizontal' } do |f| %>
+  <% if !@modelo.mueble.nil?%>
+      <div class="form-group">
+         <%= f.label 'Mueble base', :class => 'control-label col-lg-2' %>
+        <div class="col-lg-6">
+         <%= f.text_field :mueble, :class => 'form-control',:disabled=>:true,:value=>@modelo.mueble.nombre %>
+        </div>
+      </div> 
 
-  <% if @modelo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@modelo.errors.count, "error") %> prohibited this modelo from being saved:</h2>
-
-      <ul>
-      <% @modelo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%end%>
+  
+  <div class="form-group">
+    <%= f.label 'Nombre del modelo', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :nombre, :class => 'form-control' %>
     </div>
-  <% end %>
-  <%=f.hidden_field :mueble_id,:value=>@mueble.id%>
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
   </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
+  <div class="form-group">
+    <%= f.label 'Código del modelo', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :codigo, :class => 'form-control' %>
+    </div>
   </div>
-  <!-- Estos campos no se usan .. son los mismos valores que el mueble base
-  <div class="field">
-    <%= f.label :ancho %><br>
-    <%= f.number_field :ancho %>
+  <div class="form-group">
+    <%= f.label 'Descripción', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-6">
+    <%= f.text_area :descripcion, :class => 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :alto %><br>
-    <%= f.number_field :alto %>
-  </div>
-  <div class="field">
-    <%= f.label :fondo %><br>
-    <%= f.number_field :fondo %>
-  </div> -->
-  <div class="actions">
-    <%= f.submit %>
+  
+  <!--
+  <div class="form-group">
+    <%= f.label :mueble_id, :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.number_field :mueble_id, :class => 'form-control' %>
+    </div>
+  </div>-->
+
+  <div class="form-group">
+     <div class="col-lg-2"></div>
+      <div class="col-lg-6">
+    <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), modelos_path, :class => 'btn' %>
+    </div>
   </div>
 <% end %>

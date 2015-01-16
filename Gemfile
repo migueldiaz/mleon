@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # twitter bootstrap css & javascript toolkit
 gem 'twitter-bootswatch-rails', '~> 3.2.0'
+gem 'will_paginate-bootstrap'
+gem  'jquery-tablesorter'
 
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'

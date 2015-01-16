@@ -4,8 +4,15 @@ class ModelosController < ApplicationController
   # GET /modelos
   # GET /modelos.json
   def index
-    @mueble=Mueble.find(params[:mueble_id])
-    @modelos = @mueble.modelos
+    if(params[:mueble_id])
+       @mueble=Mueble.find(params[:mueble_id])
+       @modelos = @mueble.modelos
+    elsif params[:clase]
+       @clase=Clase.find(params[:clase])
+      @modelos=@clase.modelos
+    else
+      @modelos=Modelo.all
+    end
   end
 
   # GET /modelos/1
@@ -16,12 +23,17 @@ class ModelosController < ApplicationController
 
   # GET /modelos/new
   def new
-    @mueble=Mueble.find(params[:mueble_id])
-    @modelo = @mueble.modelos.new
+      if !params[:mueble_id].nil?
+        @mueble=Mueble.find(params[:mueble_id])
+        @modelo = @mueble.modelos.new
+      else
+        @modelo=Modelo.new
+      end
   end
 
   # GET /modelos/1/edit
   def edit
+    @modelo=Modelo.find(params[:id])
     @mueble=@modelo.mueble
   end
 
@@ -62,13 +74,18 @@ class ModelosController < ApplicationController
   # DELETE /modelos/1
   # DELETE /modelos/1.json
   def destroy
-    @mueble=@modelo.mueble
-    @modelo.destroy
+  
+       @mueble=@modelo.mueble
+       @modelo.destroy
 
-    respond_to do |format|
-      format.html { redirect_to mueble_modelos_path(@mueble), notice: 'Modelo was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      respond_to do |format|
+         if(!@modelo.mueble.nil?)
+        format.html { redirect_to mueble_modelos_path(@mueble), notice: 'Modelo was successfully destroyed.' }
+      else
+        format.html { redirect_to modelos_path, notice: 'Modelo was successfully destroyed.' }
+      end
+        format.json { head :no_content }
+      end
   end
 
   private
@@ -79,6 +96,6 @@ class ModelosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def modelo_params
-      params.require(:modelo).permit(:nombre, :descripcion, :ancho, :alto, :fondo,:mueble_id)
+      params.require(:modelo).permit(:nombre, :descripcion, :ancho, :alto, :fondo,:mueble_id,:codigo)
     end
 end

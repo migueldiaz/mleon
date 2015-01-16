@@ -1,37 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Piezas</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Descripcion</th>
-      <th>Ancho</th>
-      <th>Alto</th>
-      <th colspan="3"></th>
+<%- model_class = Pieza -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %> <%= link_to 'Crear una pieza',
+            new_pieza_path,
+            :class => 'btn btn-primary pull-right' %></h1>
+ 
+</div>
+<script type="text/javascript">
+  $(function(){
+  $("#tabla").tablesorter();
+});
+</script>
+<table id='tabla' class="table table-striped tablesorter">
+   <thead>
+   <tr>
+      <th><%= model_class.human_attribute_name(:nombre) %></th>
+      <th><%= model_class.human_attribute_name(:tipo) %></th>
+      <th><%= model_class.human_attribute_name(:alto) %></th>
+      <th><%= model_class.human_attribute_name(:ancho) %></th>
+      <th><%= model_class.human_attribute_name(:descripcion) %></th>
+      <th>Acciones</th>
     </tr>
   </thead>
-
   <tbody>
     <% @piezas.each do |pieza| %>
       <tr>
-        <td><%= pieza.nombre %></td>
+        <td><%= link_to pieza.nombre, pieza_path(pieza) %></td>
         <td><%= pieza.tipo %></td>
-        <td><%= pieza.descripcion %></td>
-        <td><%= pieza.ancho %></td>
         <td><%= pieza.alto %></td>
-        <td><%= link_to 'Show', pieza %></td>
-        <td><%= link_to 'Edit', edit_pieza_path(pieza) %></td>
-        <td><%= link_to 'Destroy', pieza, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= pieza.ancho %></td>
+        <td><%= pieza.descripcion %></td>
+        <td>
+          <%= link_to 'Editar',
+                      edit_pieza_path(pieza), :class => 'btn btn-primary btn-xs' %>
+          <%= link_to 'Borrara',
+                      pieza_path(pieza),
+                      :method => :delete,
+                      :data => { :confirm =>'¿Estás seguro? Esta pieza dejará de estar disponible en cualquier mueble en el que se use. Esto no se puede deshacer'},
+                      :class => 'btn btn-danger btn-xs' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= will_paginate @piezas, renderer: BootstrapPagination::Rails %>
 
-<%= link_to 'New Pieza', new_pieza_path %>
-<hr/>
-<%= link_to 'Inicio',root_path%>

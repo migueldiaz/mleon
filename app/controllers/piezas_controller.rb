@@ -4,7 +4,8 @@ class PiezasController < ApplicationController
   # GET /piezas
   # GET /piezas.json
   def index
-    @piezas = Pieza.all
+    #@piezas = Pieza.all
+    @piezas = Pieza.all.paginate(:page =>  params[:page], :per_page => 10)
   end
 
   # GET /piezas/1

@@ -1,58 +1,134 @@
 
  <ul class="breadcrumb">Estás en: &nbsp;&nbsp;
-  <li class="active"><%=link_to 'Muebles',muebles_path%></li>
-  <li><%=link_to @mueble.nombre,@mueble%></li>
+ <li><%=link_to 'Inicio',root_path%></li>
+  <li><%=link_to 'Muebles',muebles_path%></li>
+  <li class="active"><%=@mueble.nombre%></li>
 </ul>
 <!--<%- model_class = Mueble -%>-->
-<div class="page-header">
+<!--<div class="page-header">
   <h3><%=@mueble.nombre%></h3>
-</div>
+</div>-->
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <h4><%=@mueble.nombre%></h4>
+    <h4><%=@mueble.nombre%></h4><p>Este mueble usa <b><%=@mueble.piezas.count%></b> tipos de piezas y tiene <b><%=@mueble.modelos.count%></b> modelo/s<p>
   </div>
 </div>
 
 
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= @mueble.nombre %><%= link_to 'Editar el mueble',
-              edit_mueble_path(@mueble), :class => 'btn btn-primary pull-right' %></h3>
-    
-  </div>
-  <div class="panel-body">
-        <dl class="dl-horizontal">
-      <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
-      <dd><%= @mueble.nombre %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
-      <dd><%= @mueble.descripcion %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:ancho) %>:</strong></dt>
-      <dd><%= @mueble.ancho %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:alto) %>:</strong></dt>
-      <dd><%= @mueble.alto %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:fondo) %>:</strong></dt>
-      <dd><%= @mueble.fondo %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:categoría) %>:</strong></dt>
-      <% if !@mueble.clase.nil?%> <dd><%= @mueble.clase.nombre %></dd><%end%>
-    </dl>
-      <div class="pull-right">
-     
-        <%= link_to 'Eliminar',
-              mueble_path(@mueble),
-              :method => 'delete',
-              :data => { :confirm => '¿Estás seguro? Esto no se puede deshacer' },
-              :class => 'btn btn-danger btn-xs' %>
 
-                <%= link_to 'Eliminar',
-                      mueble_path(@mueble),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-danger btn-xs' %>
-      
-     </div>
+       <!-- Distribuimos la información en paneles para simplificar la visyualización-->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#info" data-toggle="tab" aria-expanded="false">Información del mueble</a></li>
+    <li class=""><a href="#piezas" data-toggle="tab" aria-expanded="true">Piezas del mueble</a></li>
+    <li class=""><a href="#modelos" data-toggle="tab" aria-expanded="true">Modelos del mueble</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="info">
+   
+  <br/>
+                    <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= @mueble.nombre %><%= link_to 'Editar el mueble',
+                        edit_mueble_path(@mueble), :class => 'btn btn-primary pull-right' %></h3>
+              
+            </div>
+            <div class="panel-body">
+                  <dl class="dl-horizontal">
+                <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
+                <dd><%= @mueble.nombre %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
+                <dd><%= @mueble.descripcion %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:ancho) %>:</strong></dt>
+                <dd><%= @mueble.ancho %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:alto) %>:</strong></dt>
+                <dd><%= @mueble.alto %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:fondo) %>:</strong></dt>
+                <dd><%= @mueble.fondo %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:categoría) %>:</strong></dt>
+                <% if !@mueble.clase.nil?%> <dd><%= @mueble.clase.nombre %></dd><%end%>
+              </dl>
+                <div class="pull-right">
+               
+                  <%= link_to 'Eliminar',
+                        mueble_path(@mueble),
+                        :method => 'delete',
+                        :data => { :confirm => '¿Estás seguro? Esto no se puede deshacer' },
+                        :class => 'btn btn-danger btn-xs' %>
+               </div>
+            </div>
+          </div>
   </div>
-</div>
+  <div class="tab-pane fade " id="piezas">
+           <br/>
+          <!--Aquí las piezas del mueble:-->
+            <table class="table table-striped">
+            <thead>
+              <tr  class="success">
+               
+                <th><%= model_class.human_attribute_name(:nombre) %></th>
+                <th><%= model_class.human_attribute_name(:cantidad) %></th>
+               
+                <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
+                <th>
+                  <button type="button" class="btn btn-primary  pull-right" data-toggle="modal" data-target="#myModal">
+                  Añadir piezas
+          </button>
+                
+            </thead>
+            <tbody>
+              <% @mueble.componentes.each do |componente| %>
+                <tr>
+                  
+                  <td><%= link_to componente.pieza.nombre, pieza_path(componente.pieza) %></td>
+                  <td><span class="badge"><%= componente.cantidad %></span></td>
+                 <!-- <td><%=l componente.pieza.created_at %></td>-->
+                  <td>
+                    
+                    <%= link_to 'Borrar piezas', [componente.mueble, componente],
+                         method: :delete,
+                         data: { confirm: '¿Está seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <!--Fin-->
+  </div>
+  <div class="tab-pane fade" id="modelos">
+            <br/>
+            <table class="table table-striped">
+            <thead>
+              <tr  class="success">
+                <th>Modelo</th>
+                <th>Descripcción</th>
+                <th> <%= link_to 'Añadir modelo', new_mueble_modelo_path(@mueble),:class=>"btn btn-primary pull-right" %> </th>
+            </thead>
+            <tbody>
+              <% @mueble.modelos.each do |modelo| %>
+                <tr>
+                  
+                  <td><%= link_to modelo.nombre, modelo_path(modelo) %></td>
+                  <td><%= modelo.descripcion %></td>
+                  <td>
+                    
+                    <%= link_to 'Borrar el modelo', [modelo.mueble, modelo],
+                         method: :delete,
+                         data: { confirm: '¿Está seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+  </div>
+  
+<!--Fin de la distribuición-->
+
+
+
+
 
 
 
@@ -63,42 +139,6 @@
 </button>-->
 
 
-
-<!--Aquí las piezas del mueble:-->
-
-  <table class="table table-striped">
-  <thead>
-    <tr  class="success">
-     
-      <th><%= model_class.human_attribute_name(:nombre) %></th>
-      <th><%= model_class.human_attribute_name(:cantidad) %></th>
-     
-      <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
-      <th>
-        <button type="button" class="btn btn-primary  pull-right" data-toggle="modal" data-target="#myModal">
-        Añadir piezas
-</button>
-      
-  </thead>
-  <tbody>
-    <% @mueble.componentes.each do |componente| %>
-      <tr>
-        
-        <td><%= link_to componente.pieza.nombre, pieza_path(componente.pieza) %></td>
-        <td><%= componente.cantidad %></td>
-       <!-- <td><%=l componente.pieza.created_at %></td>-->
-        <td>
-          
-          <%= link_to 'Borrar piezas', [componente.mueble, componente],
-               method: :delete,
-               data: { confirm: '¿Está seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<!--Fin-->
 
 
 <!-- Modal -->
@@ -146,33 +186,3 @@
   </div>
 </div>
 
-
-  <ul class="nav nav-tabs">
-  <li class=""><a href="#home" data-toggle="tab" aria-expanded="false">Home</a></li>
-  <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="true">Profile</a></li>
-  <li class="disabled"><a>Disabled</a></li>
-  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      Dropdown <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
-      <li class="divider"></li>
-      <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
-    </ul>
-  </li>
-</ul>
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade" id="home">
-    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-  </div>
-  <div class="tab-pane fade active in" id="profile">
-    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
-  </div>
-  <div class="tab-pane fade" id="dropdown1">
-    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
-  </div>
-  <div class="tab-pane fade" id="dropdown2">
-    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
-  </div>
-</div>

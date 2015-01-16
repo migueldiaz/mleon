@@ -7,9 +7,9 @@ class ModelosController < ApplicationController
     if(params[:mueble_id])
        @mueble=Mueble.find(params[:mueble_id])
        @modelos = @mueble.modelos
-    elsif params[:clase]
+    elsif params[:clase].present?
        @clase=Clase.find(params[:clase])
-      @modelos=@clase.modelos
+       @modelos=@clase.modelos
     else
       @modelos=Modelo.all
     end
@@ -18,6 +18,9 @@ class ModelosController < ApplicationController
   # GET /modelos/1
   # GET /modelos/1.json
   def show
+    if(params[:id])
+      @modelo=Modelo.find(params[:id])
+    end
     @piezas=Pieza.where(:tipo!='Casco')
   end
 
@@ -40,15 +43,15 @@ class ModelosController < ApplicationController
   # POST /modelos
   # POST /modelos.json
   def create
-    @mueble=Mueble.find(params[:mueble_id])
-    @modelo=@mueble.modelos.create(modelo_params)
+    #@mueble=Mueble.find(params[:mueble_id])
+    @modelo=Modelo.create(modelo_params)
      #   redirect_to modelo_path(@modelo)
 
     #@modelo = Modelo.new(modelo_params)
 
     respond_to do |format|
       if @modelo.save
-        format.html { redirect_to @modelo, notice: 'Modelo was successfully created.' }
+        format.html { redirect_to @modelo, notice: 'El modelo se ha creado' }
         format.json { render :show, status: :created, location: @modelo }
       else
         format.html { render :new }
@@ -62,7 +65,7 @@ class ModelosController < ApplicationController
   def update
     respond_to do |format|
       if @modelo.update(modelo_params)
-        format.html { redirect_to @modelo, notice: 'Modelo was successfully updated.' }
+        format.html { redirect_to @modelo, notice: 'El modelo se ha actualizado' }
         format.json { render :show, status: :ok, location: @modelo }
       else
         format.html { render :edit }

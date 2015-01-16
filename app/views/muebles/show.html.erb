@@ -11,10 +11,9 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <h4><%=@mueble.nombre%></h4><p>Este mueble usa <b><%=@mueble.piezas.count%></b> tipos de piezas y tiene <b><%=@mueble.modelos.count%></b> modelo/s<p>
+    <h4><%=@mueble.nombre%></h4><p>Este mueble usa <b><%=@mueble.piezas.count%></b> tipos de piezas y tiene <%=pluralize(@mueble.modelos.count, 'modelo')%><p>
   </div>
 </div>
-
 
 
        <!-- Distribuimos la información en paneles para simplificar la visyualización-->

@@ -4,7 +4,7 @@ class ClasesController < ApplicationController
   # GET /clases
   # GET /clases.json
   def index
-    @clases = Clase.all
+      @clases = Clase.all
   end
 
   # GET /clases/1

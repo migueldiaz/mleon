@@ -1,26 +1,24 @@
 <ul class="breadcrumb">Estás en: &nbsp;&nbsp;
     <li><%=link_to 'Inicio',root_path%></li>
-    <%if params[:controller]== 'mueble'%>
+    <%if params[:controller]== 'muebles'%>
        <li><%=link_to 'Muebles',muebles_path%></li>
-    <%elsif params[:controller]== 'modelo'%>
-       <li><%=link_to 'Modelos',modelos_path%></li>
-    <%end%>
-    <%if params[:mueble_id]%>
+    <%elsif params[:clase].present?%>
+        <li><%=link_to 'Modelos',modelos_path%></li>
+         <li class="active"><%=@clase.nombre%></li>
+    <%elsif params[:mueble_id]%>
+       <li><%=link_to 'Muebles',muebles_path%></li>
        <li><%=link_to @mueble.nombre,muebles_path(@mueble)%></li>
-    <%end%>
-  <li class="active">Modelos</li>
+    <%elsif params[:controller]=='modelos'%>
+       <li class="active">Modelos</li>
+    <%end%> 
 </ul>
-
-
-
 <div class="page-header">
   <h1>Modelos
       <%if params[:mueble_id]%>
-      <%=link_to 'Crear un modelo',new_modelo_path(:mueble_id=>params[:mueble_id]), :class => 'btn btn-primary pull-right'%>
+        <%=link_to 'Crear un modelo',new_modelo_path(:mueble_id=>params[:mueble_id]), :class => 'btn btn-primary pull-right'%>
       <%else%>
-      <%= link_to 'Crear un modelo',new_modelo_path, :class => 'btn btn-primary pull-right' %>
-<%end%>
-
+        <%= link_to 'Crear un modelo',new_modelo_path, :class => 'btn btn-primary pull-right' %>
+      <%end%>
   </h1>
 </div>
 <table class="table table-striped">
@@ -53,7 +51,9 @@
                 <ul class="dropdown-menu">
                   <li><a href="<%=edit_modelo_path(modelo)%>">Editar</a></li>
                   <li class="divider"></li>
-                  <li><%= link_to 'Eliminar',:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-danger btn-xs' %></li>
+                  <li><%= link_to 'Borrar el modelo', modelo,
+                         method: :delete,
+                         data: { confirm: '¿Está seguro? Esta acción no se puede deshacer' },:class=>"" %></li>
                 </ul>
             </div>
          </td>

@@ -38,4 +38,39 @@
   </div>
 </div>
 
-
+<!-- Pedidos del cliente-->
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Listado de pedidos de <%=@cliente.nombre%></h3>
+  </div>
+  <div class="panel-body">
+              <span><%=link_to 'Añadir',new_cliente_pedido_path(@cliente),:class=>'btn btn-primary pull-right'%></span>
+              <table class="table table-striped">
+              <thead>
+                <tr> 
+                  <th>Fecha</th>
+                  <th>Muebles que incluye</th>
+                  <th >Acciones </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @cliente.pedidos.each do |pedido| %>
+                  <tr>
+                    <td><%=pedido.fecha%></td>
+                    <td><span class='badge'><%=pedido.items.count%></span>&nbsp; <%=link_to 'modelos',pedido_path(pedido) %></td>
+                    
+                    <td>
+                      <%= link_to 'Editar',
+                                  pedido_items_path(pedido), :class => 'btn btn-primary btn-xs' %>
+                      <%= link_to 'Eliminar',
+                                  pedido_path(pedido),
+                                  :method => :delete,
+                                  :data => { :confirm => 'Se eliminara este pedido.¿Estás seguro?'},
+                                  :class => 'btn btn-danger btn-xs' %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+  </div>
+</div>

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
   
+  get 'desglose/show'
+
  resources :items
   resources :clientes do
      resources :pedidos

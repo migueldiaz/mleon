@@ -20,7 +20,7 @@
     <% @clientes.each do |cliente| %>
       <tr>
         <td><%= link_to cliente.id, cliente_path(cliente) %></td>
-        <td><%= cliente.nombre %></td>
+        <td><%= link_to cliente.nombre,cliente %></td>
         <td><%= cliente.CIF %></td>
         <td><%= cliente.telefono %></td>
         <td><%= cliente.email %></td>

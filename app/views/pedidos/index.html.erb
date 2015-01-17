@@ -18,7 +18,7 @@
         <td><%= link_to pedido.id, pedido_path(pedido) %></td>
         <td><%= pedido.fecha%></td>
         <td><%=link_to pedido.cliente.nombre,pedido.cliente %></td>
-        <td><%=pedido.modelos.sum('cantidad')%></td>
+        <td><span class='badge'><%=pedido.modelos.sum('cantidad')%></span>&nbsp;&nbsp;<%=link_to 'Añadir items al pedido',new_pedido_item_path(pedido),:class=>'btn btn-primary btn-xs'%></td>
         <td>
           <%= link_to 'Editar',
                       edit_pedido_path(pedido), :class => 'btn btn-primary btn-xs' %>

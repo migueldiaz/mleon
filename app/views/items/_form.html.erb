@@ -1,4 +1,7 @@
-<%= form_for(@item) do |f| %>
+
+  <%= form_for(@item, :html => { :class => 'form-horizontal' }) do |f| %>
+
+
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -11,19 +14,37 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :pedido_id %><br>
-    <%= f.text_field :pedido_id %>
+   <div class="form-group">
+    <div class='col-lg-3'> </div>
+   <div class="col-lg-4">
+     <div class="well">
+     <i>Elige los <b>modelos</b> y la <b>cantidad</b> que quieres añadir al pedido</i>
   </div>
-  <div class="field">
-    <%= f.label :modelo_id %><br>
-    <%= f.text_field :modelo_id %>
-  </div>
-  <div class="field">
-    <%= f.label :cantidad %><br>
+    </div>
+    </div>
+
+  
+    <%= f.hidden_field :pedido_id%>
+    <div class="form-group">
+   <%= f.label 'Modelo', :class => 'control-label col-lg-3' %>
+   <div class="col-lg-4">
+      <%= f.collection_select(:modelo_id, Modelo.all, :id, :nombre, {:prompt => 'Elige el modelo'},{:class=>'form-control '}) %>
+    </div> 
+    </div>
+    <div class="form-group">
+  <%= f.label 'cantidad', :class => 'control-label col-lg-3' %>
+   <div class="col-lg-4">
     <%= f.number_field :cantidad %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    </div>
+    </div>
+  
+    <div class="form-group">
+    <div class='col-lg-3'> </div>
+   <div class="col-lg-4">
+    
+    <%=f.submit 'Guardar',:class=>'btn btn-primary'%>
+
+    </div>
+    </div>
+
 <% end %>

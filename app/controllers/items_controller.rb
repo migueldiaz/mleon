@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-
+  autocomplete :modelo, :nombre,:full => true
   # GET /items
   # GET /items.json
   def index
@@ -10,15 +10,21 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @pedido=@item.pedido
   end
 
   # GET /items/new
   def new
-    @item = Item.new
+    @pedido=Pedido.find(params[:pedido_id])
+    @item = @pedido.items.new
   end
 
   # GET /items/1/edit
   def edit
+    if params[:id] 
+      @item=Item.find(params[:id])
+    end  
+    @pedido=@item.pedido
   end
 
   # POST /items
@@ -28,8 +34,8 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
+        format.html { redirect_to @item.pedido, notice: 'Item was successfully created.' }
+        format.json { render :show, status: :created, location: @item.pedido }
       else
         format.html { render :new }
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -42,8 +48,8 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
+        format.html { redirect_to @item.pedido, notice: 'Item was successfully updated.' }
+        format.json { render :show, status: :ok, location: @item.pedido }
       else
         format.html { render :edit }
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -54,9 +60,10 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
+    @pedido=@item.pedido
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+      format.html { redirect_to @pedido, notice: 'Se ha eliminado el item del pedido' }
       format.json { head :no_content }
     end
   end

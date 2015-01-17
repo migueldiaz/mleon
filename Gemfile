@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'twitter-bootswatch-rails', '~> 3.2.0'
 gem 'will_paginate-bootstrap'
 gem  'jquery-tablesorter'
+gem 'rails4-autocomplete'
 
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'

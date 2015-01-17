@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
-  resources :items
 
-  resources :pedidos
 
-  resources :clientes
+  
+ resources :items
+  resources :clientes do
+     resources :pedidos
+  end
+
+  resources :pedidos do
+    resources :items
+    get :autocomplete_modelo_nombre, :on => :collection
+
+  end
 
   resources :muebles do
     resources :componentes
@@ -17,6 +25,7 @@ Rails.application.routes.draw do
   resources :piezas
 
   resources :modelos do
+    get :autocomplete_modelo_nombre, :on => :collection
     resources :componentes
   end
 

@@ -1,31 +1,42 @@
 <%- model_class = Cliente -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Cliente: <%=@cliente.nombre%></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
-  <dd><%= @cliente.nombre %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:CIF) %>:</strong></dt>
-  <dd><%= @cliente.CIF %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
-  <dd><%= @cliente.telefono %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @cliente.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:direccion) %>:</strong></dt>
-  <dd><%= @cliente.direccion %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:notas) %>:</strong></dt>
-  <dd><%= @cliente.notas %></dd>
-</dl>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              clientes_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_cliente_path(@cliente), :class => 'btn btn-primary' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Información del cliente:</h3>
+  </div>
+  <div class="panel-body">  
+      <dl class="dl-horizontal">
+        <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
+        <dd><%= @cliente.nombre %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:CIF) %>:</strong></dt>
+        <dd><%= @cliente.CIF %></dd>
+        <hr/>
+        <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
+        <dd><%= @cliente.telefono %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+        <dd><%= mail_to @cliente.email%></dd>
+        <dt><strong><%= model_class.human_attribute_name(:direccion) %>:</strong></dt>
+        <dd><%= @cliente.direccion %></dd>
+        <%if @cliente.notas.present?%>
+        <hr/>
+        <dt><strong><%= model_class.human_attribute_name(:notas) %>:</strong></dt>
+        <dd><%= @cliente.notas %></dd>
+        <%end%>
+      </dl>
+          <div class="form-actions pull-right">
+           
+          <%= link_to 'Editar',edit_cliente_path(@cliente), :class => 'btn btn-primary' %>
+              <%= link_to 'Eliminar',
               cliente_path(@cliente),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+        </div>
+
+  </div>
 </div>
+
+

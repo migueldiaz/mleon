@@ -1,11 +1,13 @@
-<%- model_class = Pedido -%>
+
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Detalles del pedido</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:cliente_id) %>:</strong></dt>
-  <dd><%= @pedido.cliente_id %></dd>
+  <dt><strong>Cliente</strong></dt>
+  <dd><%= @pedido.cliente.nombre%> - <%=@pedido.cliente.CIF%></dd>
+  <dt><strong>Fecha</strong></dt>
+  <dd><%= @pedido.fecha%></dd>
 </dl>
 
 <div class="form-actions">

@@ -1,3 +1,15 @@
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+    <li><%=link_to 'Inicio',root_path%></li>
+    <li><%=link_to 'Clientes',clientes_path%></li>
+    <li><%=link_to @pedido.cliente.nombre,@pedido.cliente%></li>
+    <li><%=link_to @pedido.fecha,@pedido%></li>
+    
+    <li class="active">Desglose</li>
+</ul>
+
+
+
+
 <h1>Desglose del pedido</h1>
 <div class="panel panel-primary">
   <div class="panel-heading">

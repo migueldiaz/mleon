@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :items
+
+  resources :pedidos
+
+  resources :clientes
+
   resources :muebles do
     resources :componentes
     resources :modelos

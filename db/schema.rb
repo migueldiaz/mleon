@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107190253) do
+ActiveRecord::Schema.define(version: 20150117001924) do
 
   create_table "clases", force: :cascade do |t|
     t.string   "nombre",      limit: 255
     t.text     "descripcion", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "clientes", force: :cascade do |t|
+    t.string   "nombre",     limit: 255
+    t.string   "CIF",        limit: 255
+    t.string   "telefono",   limit: 255
+    t.string   "email",      limit: 255
+    t.text     "direccion",  limit: 65535
+    t.text     "notas",      limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "componentes", force: :cascade do |t|
@@ -32,6 +43,17 @@ ActiveRecord::Schema.define(version: 20150107190253) do
   add_index "componentes", ["modelo_id"], name: "index_componentes_on_modelo_id", using: :btree
   add_index "componentes", ["mueble_id"], name: "index_componentes_on_mueble_id", using: :btree
   add_index "componentes", ["pieza_id"], name: "index_componentes_on_pieza_id", using: :btree
+
+  create_table "items", force: :cascade do |t|
+    t.integer  "pedido_id",  limit: 4
+    t.integer  "modelo_id",  limit: 4
+    t.integer  "cantidad",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "items", ["modelo_id"], name: "index_items_on_modelo_id", using: :btree
+  add_index "items", ["pedido_id"], name: "index_items_on_pedido_id", using: :btree
 
   create_table "modelos", force: :cascade do |t|
     t.string   "nombre",      limit: 255
@@ -60,6 +82,15 @@ ActiveRecord::Schema.define(version: 20150107190253) do
 
   add_index "muebles", ["clase_id"], name: "index_muebles_on_clase_id", using: :btree
 
+  create_table "pedidos", force: :cascade do |t|
+    t.integer  "cliente_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "fecha",      limit: 255
+  end
+
+  add_index "pedidos", ["cliente_id"], name: "index_pedidos_on_cliente_id", using: :btree
+
   create_table "piezas", force: :cascade do |t|
     t.string   "nombre",      limit: 255
     t.string   "tipo",        limit: 255
@@ -73,6 +104,9 @@ ActiveRecord::Schema.define(version: 20150107190253) do
   add_foreign_key "componentes", "modelos"
   add_foreign_key "componentes", "muebles"
   add_foreign_key "componentes", "piezas"
+  add_foreign_key "items", "modelos"
+  add_foreign_key "items", "pedidos"
   add_foreign_key "modelos", "muebles"
   add_foreign_key "muebles", "clases"
+  add_foreign_key "pedidos", "clientes"
 end

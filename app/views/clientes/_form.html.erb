@@ -1,0 +1,47 @@
+<%= form_for @cliente, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <div class="form-group">
+    <%= f.label 'Nombre', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :nombre, :class => 'form-control' %>
+    </div>
+  </div>
+<div class="form-group">
+    <%= f.label 'CIF', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :CIF, :class => 'form-control' %>
+    </div>
+  </div>
+<div class="form-group">
+    <%= f.label 'Telefono', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :telefono, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Email', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Dirección', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_area :direccion, :class => 'form-control' %>
+    </div>
+  </div>
+ <div class="form-group">
+    <%= f.label 'Notas', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_area :notas, :class => 'form-control' %>
+    </div>
+  </div>
+    <div class="form-group">
+     <div class="col-lg-2"></div>
+      <div class="col-lg-6">
+    <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
+    <%= link_to 'Cancelar', modelos_path, :class => 'btn' %>
+    </div>
+  </div>
+
+<% end %>

@@ -134,7 +134,7 @@
               <div class="form-group">
                     <%= f.label 'Pieza', :class => 'control-label col-lg-3' %>
                     <div class="col-lg-4">
-                      <%= f.collection_select(:pieza_id, Pieza.all, :id, :nombre, {:prompt => 'Elige la pieza'},{:class=>'form-control '}) %>
+                      <%= f.collection_select(:pieza_id, Pieza.where("tipo != 'Casco'"), :id, :nombre, {:prompt => 'Elige la pieza'},{:class=>'form-control '}) %>
                     </div>
               </div> 
 

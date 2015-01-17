@@ -6,7 +6,7 @@
   <div class="panel-body">
         <dl class="dl-horizontal">
           <dt><strong>Cliente</strong></dt>
-          <dd><%= link_to @pedido.cliente.nombre%> - <%= link_to @pedido.cliente.CIF%> &nbsp;&nbsp;<b>Teléfono:</b> <%=@pedido.cliente.telefono%></dd>
+          <dd><%= @pedido.cliente.nombre%> - <%= @pedido.cliente.CIF%> &nbsp;&nbsp;<b>Teléfono:</b> <%=@pedido.cliente.telefono%></dd>
           <dt><strong>Fecha</strong></dt>
           <dd><%= @pedido.fecha%></dd>
         </dl>
@@ -20,19 +20,20 @@
   </div>
   <div class="panel-body">
         <!--Aqui la cuenta de piezas-->
-  		Total de piezas:
-
+  		Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@cascos.count%></span>
+  		<% if !@cascos.empty?%>
   		<table class="table table-striped">
               <thead>
                 <tr> 
-                  <th>Cantidad:</th>
+            
+                  <th width="50">Cantidad:</th>
                   <th>Nombre de la pieza</th>
                 </tr>
               </thead>
               <tbody>
                 <% @cascos.each do |componente| %>
                   <tr>
-                   <td><%=componente.cantidad%></td>
+                   <td><span class='badge'><%=componente.cantidad%></span></td>
                     <td><%= componente.pieza.nombre%></td>
                     
                    
@@ -40,7 +41,7 @@
                 <% end %>
               </tbody>
             </table>
-
+            <%end%>
 
   </div>
 </div>
@@ -53,6 +54,31 @@
   <div class="panel-body">
        
   	 <!--Aqui la cuenta de piezas-->
+
+  	 			  <!--Detalle de piezas-->
+
+        <!--Aqui la cuenta de piezas-->
+  		Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@puertas.count%></span>
+  		<% if !@puertas.empty?%>
+  		<table class="table table-striped">
+              <thead>
+                <tr> 
+                  <th width="50">Cantidad:</th>
+                  <th>Nombre de la pieza</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @puertas.each do |componente| %>
+                  <tr>
+                   <td><span class='badge'><%=componente.cantidad%></span></td>
+                    <td><%= componente.pieza.nombre%></td>
+                    
+                   
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%end%>
   </div>
 </div>
 <!--Aqui las piezas de ti herraje-->
@@ -62,6 +88,26 @@
   </div>
   <div class="panel-body">
          <!--Aqui la cuenta de piezas-->
-  
+  			Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@herrajes.count%></span>
+  		<% if !@herrajes.empty?%>
+  		<table class="table table-striped">
+              <thead>
+                <tr> 
+                  <th width="50">Cantidad:</th>
+                  <th>Nombre de la pieza</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @herrajes.each do |componente| %>
+                  <tr>
+                   <td><span class='badge'><%=componente.cantidad%></span></td>
+                    <td><%= componente.pieza.nombre%></td>
+                    
+                   
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%end%>
   </div>
  </div>

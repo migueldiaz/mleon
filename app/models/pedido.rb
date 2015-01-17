@@ -4,4 +4,5 @@ class Pedido < ActiveRecord::Base
   has_many :modelos, :through => :items
   has_many :piezas, :through => :modelos
   has_many :componentes, :through => :modelos
+  has_many :muebles, :through => :modelos
 end

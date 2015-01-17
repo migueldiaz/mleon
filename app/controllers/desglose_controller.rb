@@ -1,8 +1,12 @@
 class DesgloseController < ApplicationController
   def show
+
   	@pedido=Pedido.find(params[:id])
-  	@cascos= @pedido.componentes.where("componente.pieza.tipo = 'CASCO'")#.where(:tipo=>'CASCO')
-  	@puertas=@pedido.piezas.where(:tipo=>'PUERTA')
-  	@herrajes=@pedido.piezas.where(:tipo=>'HERRAJE')
+
+  	@muebles=@pedido.muebles
+
+  	@cascos= Componente.joins(:mueble).where("tipo = 'CASCO'")#.where(:tipo=>'CASCO')
+  	@puertas=@pedido.componentes.where("tipo = 'PUERTA'")
+  	@herrajes=@pedido.componentes.where("tipo = 'HERRAJE'")
   end
 end

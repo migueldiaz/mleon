@@ -1,6 +1,6 @@
 <%- model_class = Clase -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Detalles de la familia</h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -11,13 +11,12 @@
 </dl>
 
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              clases_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+
+  <%= link_to 'Editar',
               edit_clase_path(@clase), :class => 'btn btn-primary' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+  <%= link_to 'Eliminar',
               clase_path(@clase),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :data => { :confirm => '¿Estás seguro? Todos los muebles de esta familia se eliminarán' },
               :class => 'btn btn-danger' %>
 </div>

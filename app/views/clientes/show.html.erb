@@ -33,6 +33,7 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+
         </div>
 
   </div>
@@ -44,7 +45,7 @@
     <h3 class="panel-title">Listado de pedidos de <%=@cliente.nombre%></h3>
   </div>
   <div class="panel-body">
-              <span><%=link_to 'Añadir',new_cliente_pedido_path(@cliente),:class=>'btn btn-primary pull-right'%></span>
+              <span><%=link_to 'Crear un pedido',new_cliente_pedido_path(@cliente),:class=>'btn btn-primary pull-right'%></span>
               <table class="table table-striped">
               <thead>
                 <tr> 
@@ -59,15 +60,20 @@
                     <td><%=pedido.fecha%></td>
                     <td><span class='badge'><%=pedido.items.count%></span>&nbsp; <%=link_to 'modelos',pedido_path(pedido) %></td>
                     
-                    <td>
-                      <%= link_to 'Editar',
-                                  pedido_items_path(pedido), :class => 'btn btn-primary btn-xs' %>
-                      <%= link_to 'Eliminar',
-                                  pedido_path(pedido),
-                                  :method => :delete,
-                                  :data => { :confirm => 'Se eliminara este pedido.¿Estás seguro?'},
-                                  :class => 'btn btn-danger btn-xs' %>
-                    </td>
+                     <td width="100">
+              <div class="btn-group">
+                <a href="<%=pedido_path(pedido)%>" class="btn btn-primary">Ver</a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_pedido_path(pedido)%>">Editar</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Borrar el pedido', @pedido,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. Los modelos de este pedido también se eliminarán' },:class=>"" %></li>
+                </ul>
+            </div>
+         </td>
                   </tr>
                 <% end %>
               </tbody>

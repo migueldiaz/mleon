@@ -1,3 +1,8 @@
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+ <li><%=link_to 'Inicio',root_path%></li>
+  <li class='active'>Piezas</li>
+</ul>
+
 <%- model_class = Pieza -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %> <%= link_to 'Crear una pieza',
@@ -29,15 +34,31 @@
         <td><%= pieza.alto %></td>
         <td><%= pieza.ancho %></td>
         <td><%= pieza.descripcion %></td>
-        <td>
+
+         <td width="100">
+              <div class="btn-group">
+                <a href="<%=pieza_path(pieza)%>" class="btn btn-primary">Ver</a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_pieza_path(pieza)%>">Editar</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Borrar la pieza', pieza,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. La pieza dejará de estar en cualquier mueble que la use' },:class=>"" %></li>
+                </ul>
+            </div>
+         </td>
+
+        <!--<td>
           <%= link_to 'Editar',
                       edit_pieza_path(pieza), :class => 'btn btn-primary btn-xs' %>
-          <%= link_to 'Borrara',
+          <%= link_to 'Borrar',
                       pieza_path(pieza),
                       :method => :delete,
                       :data => { :confirm =>'¿Estás seguro? Esta pieza dejará de estar disponible en cualquier mueble en el que se use. Esto no se puede deshacer'},
                       :class => 'btn btn-danger btn-xs' %>
-        </td>
+        </td>-->
       </tr>
     <% end %>
   </tbody>

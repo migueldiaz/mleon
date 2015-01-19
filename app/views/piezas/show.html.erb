@@ -1,6 +1,13 @@
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+ <li><%=link_to 'Inicio',root_path%></li>
+  <li><%=link_to 'Piezas',piezas_path%></li>
+  <li class="active"><%=@pieza.nombre.capitalize%></li>
+  
+</ul>
+
 <%- model_class = Pieza -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Mostrando pieza</h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -8,22 +15,22 @@
   <dd><%= @pieza.nombre %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tipo) %>:</strong></dt>
   <dd><%= @pieza.tipo %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
-  <dd><%= @pieza.descripcion %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:ancho) %>:</strong></dt>
-  <dd><%= @pieza.ancho %></dd>
   <dt><strong><%= model_class.human_attribute_name(:alto) %>:</strong></dt>
   <dd><%= @pieza.alto %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ancho) %>:</strong></dt>
+  <dd><%= @pieza.ancho %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
+  <dd><%= @pieza.descripcion %></dd>
+  
 </dl>
 
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              piezas_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+
+  <%= link_to 'Editar',
               edit_pieza_path(@pieza), :class => 'btn btn-primary' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+  <%= link_to 'Eliminar',
               pieza_path(@pieza),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :data => { :confirm => 'Se va a eliminar esta pieza. La pieza dejará de estar disponible en los muebles que la usen ¿Estás seguro?' },
               :class => 'btn btn-danger' %>
 </div>

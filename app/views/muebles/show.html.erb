@@ -38,10 +38,11 @@
                 <dd><%= @mueble.nombre %></dd>
                 <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
                 <dd><%= @mueble.descripcion %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:alto) %>:</strong></dt>
+                
+                <dd><%= @mueble.alto %></dd>
                 <dt><strong><%= model_class.human_attribute_name(:ancho) %>:</strong></dt>
                 <dd><%= @mueble.ancho %></dd>
-                <dt><strong><%= model_class.human_attribute_name(:alto) %>:</strong></dt>
-                <dd><%= @mueble.alto %></dd>
                 <dt><strong><%= model_class.human_attribute_name(:fondo) %>:</strong></dt>
                 <dd><%= @mueble.fondo %></dd>
                 <dt><strong><%= model_class.human_attribute_name(:categoría) %>:</strong></dt>
@@ -164,7 +165,7 @@
               <p>
                 <%= f.label :pieza_id %><br>
               
-                <%= f.collection_select(:pieza_id, Pieza.where("tipo = 'Casco'"), :id, :nombre ) %>
+                <%= f.collection_select(:pieza_id, Pieza.where("tipo = 'Casco'",{},{:class=>'form-control'}), :id, :nombre ) %>
                <!-- <%= f.text_area :pieza_id %>-->
               </p>
                <p>

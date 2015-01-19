@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th width="20">ID</th>
       <th width="150">Fecha del pedido</th>
       <th>Cliente</th>
       <th>Items</th>
@@ -15,19 +14,23 @@
   <tbody>
     <% @pedidos.each do |pedido| %>
       <tr>
-        <td><%= link_to pedido.id, pedido_path(pedido) %></td>
         <td><%= pedido.fecha%></td>
         <td><%=link_to pedido.cliente.nombre,pedido.cliente %></td>
         <td><span class='badge'><%=pedido.modelos.sum('cantidad')%></span>&nbsp;&nbsp;<%=link_to 'Añadir items al pedido',new_pedido_item_path(pedido),:class=>'btn btn-primary btn-xs'%></td>
-        <td>
-          <%= link_to 'Editar',
-                      edit_pedido_path(pedido), :class => 'btn btn-primary btn-xs' %>
-          <%= link_to 'Eliminar',
-                      pedido_path(pedido),
-                      :method => :delete,
-                      :data => { :confirm => 'Se eliminara este pedido del historial del cliente.¿Está seguro?'},
-                      :class => 'btn btn-danger btn-xs' %>
-        </td>
+        <td width="100">
+              <div class="btn-group">
+                <a href="<%=pedido_path(pedido)%>" class="btn btn-primary">Ver</a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_pedido_path(pedido)%>">Editar</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Borrar el pedido', pedido,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. Los items de este cliente también se eliminarán' },:class=>"" %></li>
+                </ul>
+            </div>
+         </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,33 +1,51 @@
 <%= form_for @mueble, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="form-group">
-    <%= f.label :nombre, :class => 'control-label' %>
+    <%= f.label 'Nombre del modelo', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
     <%= f.text_field :nombre, :class => 'form-control' %>
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <%= f.label 'Familia', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+   <%= f.collection_select:clase_id, Clase.all, :id,:nombre, {prompt: "Elige una categoría"}, {class: "form-control"}  %>
+    </div>
   </div>
   <div class="form-group">
-    <%= f.label :descripcion, :class => 'control-label' %>
+    <%= f.label 'Alto', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :alto, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Ancho', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :ancho, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Fondo', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
+    <%= f.text_field :fondo, :class => 'form-control' %>
+    </div>
+  </div>
+   <div class="form-group">
+    <%= f.label 'Descripción del mueble', :class => 'control-label col-lg-2' %>
+     <div class="col-lg-6">
     <%= f.text_area :descripcion, :class => 'form-control' %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :ancho, :class => 'control-label' %>
-    <%= f.number_field :ancho, :class => 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :alto, :class => 'control-label' %>
-    <%= f.number_field :alto, :class => 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :fondo, :class => 'control-label' %>
-    <%= f.number_field :fondo, :class => 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :Categoría, :class => 'control-label' %>
-    <!--<%= f.number_field :clase_id, :class => 'form-control' %>-->
-     <%= f.collection_select:clase_id, Clase.all, :id,:nombre, {prompt: "Elige una categoría"}, {class: "form-control"}  %>
+   <div class="form-group">
+    <div class ='control-label col-lg-2'></div>
+     <div class="col-lg-6">
+     <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
+    <%= link_to 'Cancelar', :class => 'btn' %>
+    </div>
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                muebles_path, :class => 'btn' %>
+ 
   </div>
 <% end %>

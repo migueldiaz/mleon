@@ -14,8 +14,8 @@
   <thead>
     <tr>
       <th>Nombre</th>
-      <th>Ancho</th>
       <th>Alto</th>
+      <th>Ancho</th>
       <th>Fondo</th>
       <th>Modelos</th>
       <th>Tipo</th>
@@ -27,22 +27,27 @@
     <% @muebles.each do |mueble| %>
       <tr>
         <td width="200"><%= link_to mueble.nombre, mueble_path(mueble) %></td>
-        <td><%= mueble.ancho %></td>
         <td><%= mueble.alto %></td>
+        <td><%= mueble.ancho %></td>
         <td><%= mueble.fondo %></td>
         <td><span class="badge"><%=mueble.modelos.count%></span>&nbsp;&nbsp;<%= link_to 'Ver',mueble_modelos_path(mueble)%></td>
         <td><%= mueble.clase.nombre %></td>
         <td><%= mueble.descripcion %></td>
        <!-- <td><%=l mueble.created_at %></td>-->
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_mueble_path(mueble), :class => 'btn btn-primary btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      mueble_path(mueble),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-danger btn-xs' %>
-        </td>
+         <td width="100">
+              <div class="btn-group">
+                <a href="<%=mueble_path(mueble)%>" class="btn btn-primary">Ver</a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_mueble_path(mueble)%>">Editar</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Borrar el mueble', mueble,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. Los modelos de este mueble también se eliminarán' },:class=>"" %></li>
+                </ul>
+            </div>
+         </td>
       </tr>
     <% end %>
   </tbody>

@@ -16,7 +16,7 @@ class ComponentesController < ApplicationController
   end
 
   def destroy
-    if params[:controller]=='muebles'
+    if params[:mueble_id].present?
       @mueble = Mueble.find(params[:mueble_id])
       @componente = @mueble.componentes.find(params[:id])
       @componente.destroy

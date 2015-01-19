@@ -11,7 +11,19 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <h4><%=@mueble.nombre%></h4><p>Este mueble usa <b><%=@mueble.piezas.count%></b> tipos de piezas y tiene <%=pluralize(@mueble.modelos.count, 'modelo')%><p>
+    <h4><%=@mueble.nombre%> <div class="btn-group pull-right">
+                <a href="<%=edit_mueble_path(@mueble)%>" class="btn btn-primary">Editar</a>
+               
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Borrar el mueble', @mueble,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. Los modelos de este mueble también se eliminarán' },:class=>"" %></li>
+                </ul>
+              </div>
+
+    </h4><p>Este mueble usa <b><%=@mueble.piezas.count%></b> tipos de piezas y tiene <%=pluralize(@mueble.modelos.count, 'modelo')%><p>
   </div>
 </div>
 
@@ -28,8 +40,7 @@
   <br/>
                     <div class="panel panel-success">
             <div class="panel-heading">
-              <h3 class="panel-title"><%= @mueble.nombre %><%= link_to 'Editar el mueble',
-                        edit_mueble_path(@mueble), :class => 'btn btn-primary pull-right' %></h3>
+              <h3 class="panel-title"><%= @mueble.nombre %></h3>
               
             </div>
             <div class="panel-body">
@@ -48,14 +59,7 @@
                 <dt><strong><%= model_class.human_attribute_name(:categoría) %>:</strong></dt>
                 <% if !@mueble.clase.nil?%> <dd><%= @mueble.clase.nombre %></dd><%end%>
               </dl>
-                <div class="pull-right">
                
-                  <%= link_to 'Eliminar',
-                        mueble_path(@mueble),
-                        :method => 'delete',
-                        :data => { :confirm => '¿Estás seguro? Esto no se puede deshacer' },
-                        :class => 'btn btn-danger btn-xs' %>
-               </div>
             </div>
           </div>
   </div>

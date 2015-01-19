@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117135213) do
+ActiveRecord::Schema.define(version: 20150119184309) do
 
   create_table "clases", force: :cascade do |t|
     t.string   "nombre",      limit: 255
@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 20150117135213) do
   create_table "muebles", force: :cascade do |t|
     t.string   "nombre",      limit: 255
     t.text     "descripcion", limit: 65535
-    t.integer  "ancho",       limit: 4
-    t.integer  "alto",        limit: 4
-    t.integer  "fondo",       limit: 4
+    t.float    "ancho",       limit: 24
+    t.float    "alto",        limit: 24
+    t.float    "fondo",       limit: 24
     t.integer  "clase_id",    limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 20150117135213) do
     t.string   "nombre",      limit: 255
     t.string   "tipo",        limit: 255
     t.text     "descripcion", limit: 65535
-    t.integer  "ancho",       limit: 4
-    t.integer  "alto",        limit: 4
+    t.float    "ancho",       limit: 24
+    t.float    "alto",        limit: 24
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

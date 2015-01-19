@@ -1,3 +1,10 @@
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+  <li><%=link_to 'Inicio',root_path%></li>
+    <li><%=link_to 'Clientes',clientes_path%></li>
+    <li class='active'><%=@cliente.nombre%></li>
+</ul>
+
+
 <%- model_class = Cliente -%>
 <div class="page-header">
   <h1>Cliente: <%=@cliente.nombre%></h1>

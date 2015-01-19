@@ -1,5 +1,5 @@
 <ul class="breadcrumb">Estás en: &nbsp;&nbsp;
-    <li><%=link_to 'Inicio',muebles_path%></li>
+    <li><%=link_to 'Inicio',root_path%></li>
   <li class="active">Muebles</li>
 </ul>
 <div class="page-header">
@@ -46,7 +46,7 @@
                          method: :delete,
                          data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. Los modelos de este mueble también se eliminarán' },:class=>"" %></li>
                 </ul>
-            </div>
+              </div>
          </td>
       </tr>
     <% end %>

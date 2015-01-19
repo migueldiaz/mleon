@@ -15,7 +15,24 @@
   $("#tabla").tablesorter();
 });
 </script>
-<table id='tabla' class="table table-striped tablesorter">
+
+
+
+
+<%= will_paginate @piezas, renderer: BootstrapPagination::Rails %>
+
+
+
+<!--aqui las pestañas-->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#casco" data-toggle="tab">Cascos</a></li>
+  <li><a href="#puerta" data-toggle="tab">Puertas</a></li>
+   <li><a href="#herraje" data-toggle="tab">Herrajes</a></li>
+  
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="casco">
+            <table id='tabla' class="table table-striped tablesorter">
    <thead>
    <tr>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
@@ -27,7 +44,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @piezas.each do |pieza| %>
+    <% @piezas.where("tipo = 'Casco'").each do |pieza| %>
       <tr>
         <td><%= link_to pieza.nombre, pieza_path(pieza) %></td>
         <td><%= pieza.tipo %></td>
@@ -64,5 +81,111 @@
   </tbody>
 </table>
 
-<%= will_paginate @piezas, renderer: BootstrapPagination::Rails %>
+<%= will_paginate @piezas.where("tipo = 'Casco'"), renderer: BootstrapPagination::Rails %>
+  </div>
+  <div class="tab-pane fade" id="puerta">
+                        <table id='tabla' class="table table-striped tablesorter">
+   <thead>
+   <tr>
+      <th><%= model_class.human_attribute_name(:nombre) %></th>
+      <th><%= model_class.human_attribute_name(:tipo) %></th>
+      <th><%= model_class.human_attribute_name(:alto) %></th>
+      <th><%= model_class.human_attribute_name(:ancho) %></th>
+      <th><%= model_class.human_attribute_name(:descripcion) %></th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @piezas.where("tipo = 'Puerta'").each do |pieza| %>
+      <tr>
+        <td><%= link_to pieza.nombre, pieza_path(pieza) %></td>
+        <td><%= pieza.tipo %></td>
+        <td><%= pieza.alto %></td>
+        <td><%= pieza.ancho %></td>
+        <td><%= pieza.descripcion %></td>
 
+         <td width="100">
+              <div class="btn-group">
+                <a href="<%=pieza_path(pieza)%>" class="btn btn-primary">Ver</a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_pieza_path(pieza)%>">Editar</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Borrar la pieza', pieza,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. La pieza dejará de estar en cualquier mueble que la use' },:class=>"" %></li>
+                </ul>
+            </div>
+         </td>
+
+        <!--<td>
+          <%= link_to 'Editar',
+                      edit_pieza_path(pieza), :class => 'btn btn-primary btn-xs' %>
+          <%= link_to 'Borrar',
+                      pieza_path(pieza),
+                      :method => :delete,
+                      :data => { :confirm =>'¿Estás seguro? Esta pieza dejará de estar disponible en cualquier mueble en el que se use. Esto no se puede deshacer'},
+                      :class => 'btn btn-danger btn-xs' %>
+        </td>-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @piezas.where("tipo = 'Puerta'"), renderer: BootstrapPagination::Rails %>
+  </div>
+  <div class="tab-pane fade" id="herraje">
+                    <table id='tabla' class="table table-striped tablesorter">
+   <thead>
+   <tr>
+      <th><%= model_class.human_attribute_name(:nombre) %></th>
+      <th><%= model_class.human_attribute_name(:tipo) %></th>
+      <th><%= model_class.human_attribute_name(:alto) %></th>
+      <th><%= model_class.human_attribute_name(:ancho) %></th>
+      <th><%= model_class.human_attribute_name(:descripcion) %></th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @piezas.where("tipo = 'Herraje'").each do |pieza| %>
+      <tr>
+        <td><%= link_to pieza.nombre, pieza_path(pieza) %></td>
+        <td><%= pieza.tipo %></td>
+        <td><%= pieza.alto %></td>
+        <td><%= pieza.ancho %></td>
+        <td><%= pieza.descripcion %></td>
+
+         <td width="100">
+              <div class="btn-group">
+                <a href="<%=pieza_path(pieza)%>" class="btn btn-primary">Ver</a>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_pieza_path(pieza)%>">Editar</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Borrar la pieza', pieza,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. La pieza dejará de estar en cualquier mueble que la use' },:class=>"" %></li>
+                </ul>
+            </div>
+         </td>
+
+        <!--<td>
+          <%= link_to 'Editar',
+                      edit_pieza_path(pieza), :class => 'btn btn-primary btn-xs' %>
+          <%= link_to 'Borrar',
+                      pieza_path(pieza),
+                      :method => :delete,
+                      :data => { :confirm =>'¿Estás seguro? Esta pieza dejará de estar disponible en cualquier mueble en el que se use. Esto no se puede deshacer'},
+                      :class => 'btn btn-danger btn-xs' %>
+        </td>-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @piezas.where("tipo = 'Herraje'"), renderer: BootstrapPagination::Rails %>
+  </div>
+ 
+</div>

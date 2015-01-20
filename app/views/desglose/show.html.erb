@@ -25,7 +25,22 @@
   
   </div>
   </div>
-  <!--Detalle de piezas-->
+
+
+
+
+
+ <!--Visualización en tablas de cara a la impresión-->
+
+ <ul class="nav nav-tabs">
+  <li class="active"><a href="#cascos" data-toggle="tab">Cascos</a></li>
+  <li><a href="#puertas" data-toggle="tab">Puertas</a></li>
+  <li><a href="#herrajes" data-toggle="tab">herrajes</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="cascos">
+  </br>
+            <!--Detalle de piezas-->
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Piezas de tipo CASCO</h3>
@@ -33,9 +48,9 @@
   <div class="panel-body">
      
         <!--Aqui la cuenta de piezas-->
-  		Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'>*</span>
-  		
-  		<table class="table table-striped">
+      Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'>*</span>
+      <br/>
+      <table class="table table-striped">
               <thead>
                 <tr> 
                   <th>Total</th>
@@ -65,21 +80,25 @@
   </div>
 </div>
  
-<!--Aqui las piezas de tipo  puerta-->
+
+  </div>
+  <div class="tab-pane fade" id="puertas">
+ <br/>
+              <!--Aqui las piezas de tipo  puerta-->
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Piezas de tipo PUERTA</h3>
   </div>
   <div class="panel-body">
        
-  	 <!--Aqui la cuenta de piezas-->
+     <!--Aqui la cuenta de piezas-->
 
-  	 			  <!--Detalle de piezas-->
+            <!--Detalle de piezas-->
 
         <!--Aqui la cuenta de piezas-->
-  		Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'>*</span>
-  	
-  		<table class="table table-striped">
+      Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'>*</span>
+    
+      <table class="table table-striped">
               <thead>
                 <tr> 
                   <th>Total</th>
@@ -107,16 +126,21 @@
             
   </div>
 </div>
-<!--Aqui las piezas de ti herraje-->
+
+  </div>
+  <div class="tab-pane fade" id="herrajes">
+  </br>
+                <!--Aqui las piezas de ti herraje-->
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Piezas de tipo HERRAJE</h3>
   </div>
   <div class="panel-body">
+    <br/>
          <!--Aqui la cuenta de piezas-->
-  			Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@herrajes%></span>
-  		<% if @herrajes.nil?%>
-  		<table class="table table-striped">
+        Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@herrajes%></span>
+      <% if @herrajes.nil?%>
+      <table class="table table-striped">
               <thead>
                 <tr> 
                   <th>Total</th>
@@ -144,3 +168,5 @@
             <%end%>
   </div>
  </div>
+  </div>
+</div>

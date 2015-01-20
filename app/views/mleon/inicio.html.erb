@@ -1,7 +1,16 @@
-<h1>Ordenes de pedido 1.0</h1>
-<p>Versión 0.2</p>
-<ul>
-	<li><%=link_to 'PIEZAS',piezas_path%> Aquí damos de alta las piezas...</li>
-	<li><%=link_to 'CLASES',clases_path%> Aquí damos de alta a la familias de muebles... ESTO ES OMISIBLE</li>
-	<li><%=link_to 'MUEBLES',muebles_path%> la madre del cordero....<p> Aquí damos de alta el mueble base con piezas exclusivamente del tipo CASCO, a cada mueble podemos generarle variantes.. LAS VARIANTES son del tipo HERRAJE y PUERTA</p></li>
+<h1>Mleon 1.0</h1>
+<p>Versión 1 Pre-Beta</p>
+<ul style= "list-style-type: none;display: inline;">
+
+	<li style= "display: inline;"><%=link_to image_tag("cliente.png",:size=>'128x128'),clientes_path %></li>&nbsp;&nbsp;&nbsp;&nbsp;
+	<li style= "display: inline;"><%=link_to image_tag("pedido.png",:size=>'128x128'),pedidos_path %></li>&nbsp;&nbsp;&nbsp;&nbsp;
+	<li style= "display: inline;"><%=link_to image_tag("mueble.png",:size=>'128x128'),muebles_path %></li>&nbsp;&nbsp;&nbsp;&nbsp;
+	<li style= "display: inline;"><%=link_to image_tag("modelo.png",:size=>'128x128'),modelos_path %></li>&nbsp;&nbsp;&nbsp;&nbsp;
+	<li style= "display: inline;"><%=link_to image_tag("familia.png",:size=>'128x128'),clases_path %></li>&nbsp;&nbsp;&nbsp;&nbsp;
+	<li style= "display: inline;"><%=link_to image_tag("pieza.png",:size=>'128x128'),piezas_path %></li>&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;
 </ul>
+<figure>
+    <%=link_to image_tag("cliente.png",:size=>'128x128'),clientes_path %>
+    <figcaption>Clientes</figcaption>
+</figure>

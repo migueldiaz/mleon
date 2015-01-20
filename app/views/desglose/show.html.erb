@@ -31,30 +31,36 @@
     <h3 class="panel-title">Piezas de tipo CASCO</h3>
   </div>
   <div class="panel-body">
-      <%=@cascos%>
+     
         <!--Aqui la cuenta de piezas-->
-  		Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@cascos.count%></span>
-  		<% if !@cascos.empty?%>
+  		Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'>*</span>
+  		
   		<table class="table table-striped">
               <thead>
                 <tr> 
-            
-                  <th width="50">Cantidad:</th>
+                  <th>Total</th>
                   <th>Nombre de la pieza</th>
+                  <th>Nº de muebles</th>
+                  <th >Cantidad por mueble</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                <% @cascos.each do |componente| %>
+                <% @items.each do |item| %>
+                 <%item.dame_cascos.each do |componente|%>
                   <tr>
+                  <td><span class='badge'><%=item.cantidad * componente.cantidad%></span></td>
+                   <td><%= componente.pieza.nombre%></td>
+                    <td><span class='badge'><%=item.cantidad%></span></td>
                    <td><span class='badge'><%=componente.cantidad%></span></td>
-                    <td><%= componente.pieza.nombre%></td>
+                   
                     
                    
                   </tr>
-                <% end %>
+                <% end %> <% end %>
               </tbody>
             </table>
-            <%end%>
+          
 
   </div>
 </div>
@@ -71,27 +77,34 @@
   	 			  <!--Detalle de piezas-->
 
         <!--Aqui la cuenta de piezas-->
-  		Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@puertas.count%></span>
-  		<% if !@puertas.empty?%>
+  		Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'>*</span>
+  	
   		<table class="table table-striped">
               <thead>
                 <tr> 
-                  <th width="50">Cantidad:</th>
+                  <th>Total</th>
                   <th>Nombre de la pieza</th>
+                  <th>Nº de muebles</th>
+                  <th >Cantidad por mueble</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                <% @puertas.each do |componente| %>
+                <% @items.each do |item| %>
+                 <%item.dame_puertas.each do |componente|%>
                   <tr>
+                  <td><span class='badge'><%=item.cantidad * componente.cantidad%></span></td>
+                   <td><%= componente.pieza.nombre%></td>
+                    <td><span class='badge'><%=item.cantidad%></span></td>
                    <td><span class='badge'><%=componente.cantidad%></span></td>
-                    <td><%= componente.pieza.nombre%></td>
+                   
                     
                    
                   </tr>
-                <% end %>
+                <% end %> <% end %>
               </tbody>
             </table>
-            <%end%>
+            
   </div>
 </div>
 <!--Aqui las piezas de ti herraje-->
@@ -101,24 +114,31 @@
   </div>
   <div class="panel-body">
          <!--Aqui la cuenta de piezas-->
-  			Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@herrajes.count%></span>
-  		<% if !@herrajes.empty?%>
+  			Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@herrajes%></span>
+  		<% if @herrajes.nil?%>
   		<table class="table table-striped">
               <thead>
                 <tr> 
-                  <th width="50">Cantidad:</th>
+                  <th>Total</th>
                   <th>Nombre de la pieza</th>
+                  <th>Nº de muebles</th>
+                  <th >Cantidad por mueble</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                <% @herrajes.each do |componente| %>
+                <% @items.each do |item| %>
+                 <%item.dame_herrajes.each do |componente|%>
                   <tr>
+                  <td><span class='badge'><%=item.cantidad * componente.cantidad%></span></td>
+                   <td><%= componente.pieza.nombre%></td>
+                    <td><span class='badge'><%=item.cantidad%></span></td>
                    <td><span class='badge'><%=componente.cantidad%></span></td>
-                    <td><%= componente.pieza.nombre%></td>
+                   
                     
                    
                   </tr>
-                <% end %>
+                <% end %> <% end %>
               </tbody>
             </table>
             <%end%>

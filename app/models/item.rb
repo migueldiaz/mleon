@@ -2,6 +2,18 @@ class Item < ActiveRecord::Base
   belongs_to :pedido
   belongs_to :modelo
   #autocomplete :modelo, :nombre
+  
+  def dame_cascos
+     return self.modelo.mueble.componentes#.where(tipo: 'Herraje')
+  end
+  def dame_puertas
+     return self.modelo.componentes.where(tipo: 'Puerta')
+  end
+  def dame_herrajes
+    return self.modelo.componentes.where(tipo: 'Herraje')
+  end
+
+
   def componentes_mueble
   	return self.modelo.mueble.componentes
   end

@@ -3,11 +3,15 @@ class DesgloseController < ApplicationController
 
   	@pedido=Pedido.find(params[:id])
 
-  	@muebles=@pedido.muebles
+  	#User.joins(:posts).where("posts.created_at < ?", Time.now)
+  	@cascos=Componente.none
+  
+  	#person.pets.select(:name) { |pet| pet.name =~ /oo/ }
+  	
+  	#@cascos=@pedido.items.first.componentes_mueble.group(:componentes)
 
-  	@mobiliario=@pedido.items.first.componentes_mueble
-  	@cascos= Componente.joins(:mueble).where("tipo = 'CASCO'")#.where(:tipo=>'CASCO')
+
   	@puertas=@pedido.componentes.where("tipo = 'PUERTA'")
-  	@herrajes=@pedido.componentes.where("tipo = 'HERRAJE'")
+  	@items=@pedido.items
   end
 end

@@ -26,79 +26,18 @@
   </div>
   </div>
 
-
-<!--Casco-->
-<p>Cascos</p>
-<table>
-  <thead>
-    <tr>
-    <th>Nombre Pieza</th>
-    <th>Cantidad</th>
-    </tr>
-  </thead>
-  <tbody>
-      <%@pedido.componentes_mueble_unicos.each do |componente|%>
-          <tr>
-            <td><%=componente.pieza.nombre%></td>
-            <td><%=@pedido.total_pieza(componente.pieza)%></td>
-          </tr>
-      <% end %>
-    </tbody>
-</table>
-<!--Puerta-->
-<hr/>
-<% @pedido.dame_puertas_pedido%>
-<p>Puertas</p>
-<table>
-  <thead>
-    <tr>
-    <th>Nombre Pieza</th>
-    <th>Cantidad</th>
-    </tr>
-  </thead>
-  <tbody>
-      <%@pedido.dame_puertas_unicas.each do |componente|%>
-          <tr>
-            <td><%=componente.pieza.nombre%></td>
-            <td><%=@pedido.total_puertas(componente.pieza)%></td>
-          </tr>
-      <% end %>
-    </tbody>
-</table>
-
-<!--Puerta-->
-<hr/>
-<% @pedido.dame_herrajes_pedido%>
-<p>Puertas</p>
-<table>
-  <thead>
-    <tr>
-    <th>Nombre Pieza</th>
-    <th>Cantidad</th>
-    </tr>
-  </thead>
-  <tbody>
-      <%@pedido.dame_herrajes_unicas.each do |componente|%>
-          <tr>
-            <td><%=componente.pieza.nombre%></td>
-            <td><%=@pedido.total_herrajes(componente.pieza)%></td>
-          </tr>
-      <% end %>
-    </tbody>
-</table>
-
  <!--Visualización en tablas de cara a la impresión-->
 
  <ul class="nav nav-tabs">
   <li class="active"><a href="#cascos" data-toggle="tab">Cascos</a></li>
   <li><a href="#puertas" data-toggle="tab">Puertas</a></li>
-  <li><a href="#herrajes" data-toggle="tab">herrajes</a></li>
+  <li><a href="#herrajes" data-toggle="tab">Herrajes</a></li>
 </ul>
 
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active in" id="cascos">
-  </br>
-
+  
+<br/>
             <!--Detalle de piezas-->
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -107,31 +46,22 @@
   <div class="panel-body">
      
         <!--Aqui la cuenta de piezas-->
-      Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'>*</span>
-      <br/>
+      <p class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.componentes_mueble_unicos.count%></span></p>
+   
       <table class="table table-striped">
               <thead>
                 <tr> 
                   <th>Total</th>
-                  <th>Nombre de la pieza</th>
-                  <th>Nº de muebles</th>
-                  <th >Cantidad por mueble</th>
-                  
+                  <th>Nombre de la pieza</th>  
                 </tr>
               </thead>
               <tbody>
-                <% @items.each do |item| %>
-                 <%item.dame_cascos.each do |componente|%>
+                 <%@pedido.componentes_mueble_unicos.each do |componente|%>
                   <tr>
-                  <td><span class='badge'><%=item.cantidad * componente.cantidad%></span></td>
-                   <td><%= componente.pieza.nombre%></td>
-                    <td><span class='badge'><%=item.cantidad%></span></td>
-                   <td><span class='badge'><%=componente.cantidad%></span></td>
-                   
-                    
-                   
+                    <td width="50"><span class='badge'><%=@pedido.total_pieza(componente.pieza)%></span></td>
+                    <td><%=componente.pieza.nombre%></td>
                   </tr>
-                <% end %> <% end %>
+              <% end %>
               </tbody>
             </table>
           
@@ -151,35 +81,24 @@
   <div class="panel-body">
        
      <!--Aqui la cuenta de piezas-->
-
-            <!--Detalle de piezas-->
-
-        <!--Aqui la cuenta de piezas-->
-      Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'>*</span>
+      <p class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.dame_puertas_unicas.count%>
     
       <table class="table table-striped">
               <thead>
                 <tr> 
                   <th>Total</th>
                   <th>Nombre de la pieza</th>
-                  <th>Nº de muebles</th>
-                  <th >Cantidad por mueble</th>
+                
                   
                 </tr>
               </thead>
               <tbody>
-                <% @items.each do |item| %>
-                 <%item.dame_puertas.each do |componente|%>
-                  <tr>
-                  <td><span class='badge'><%=item.cantidad * componente.cantidad%></span></td>
-                   <td><%= componente.pieza.nombre%></td>
-                    <td><span class='badge'><%=item.cantidad%></span></td>
-                   <td><span class='badge'><%=componente.cantidad%></span></td>
-                   
-                    
-                   
+                   <%@pedido.dame_puertas_unicas.each do |componente|%>
+                     <tr>
+                    <td width="50"><span class='badge'><%=@pedido.total_puertas(componente.pieza)%></span></td>
+                    <td><%=componente.pieza.nombre%></td>
                   </tr>
-                <% end %> <% end %>
+                  <%end%>
               </tbody>
             </table>
             
@@ -197,31 +116,22 @@
   <div class="panel-body">
     <br/>
          <!--Aqui la cuenta de piezas-->
-        Tipos de piezas usados:&nbsp;&nbsp; <span class='badge'><%=@herrajes%></span>
+          <p class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.dame_herrajes_unicas.count%>
       <% if @herrajes.nil?%>
       <table class="table table-striped">
               <thead>
                 <tr> 
                   <th>Total</th>
                   <th>Nombre de la pieza</th>
-                  <th>Nº de muebles</th>
-                  <th >Cantidad por mueble</th>
-                  
                 </tr>
               </thead>
               <tbody>
-                <% @items.each do |item| %>
-                 <%item.dame_herrajes.each do |componente|%>
-                  <tr>
-                  <td><span class='badge'><%=item.cantidad * componente.cantidad%></span></td>
-                   <td><%= componente.pieza.nombre%></td>
-                    <td><span class='badge'><%=item.cantidad%></span></td>
-                   <td><span class='badge'><%=componente.cantidad%></span></td>
-                   
-                    
-                   
+                   <%@pedido.dame_herrajes_unicas.each do |componente|%>
+                     <tr>
+                    <td width="50"><span class='badge'><%=@pedido.total_herrajes(componente.pieza)%></span></td>
+                    <td><%=componente.pieza.nombre%></td>
                   </tr>
-                <% end %> <% end %>
+                  <%end%>
               </tbody>
             </table>
             <%end%>

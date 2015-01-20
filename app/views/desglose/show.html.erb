@@ -27,8 +27,65 @@
   </div>
 
 
+<!--Casco-->
+<p>Cascos</p>
+<table>
+  <thead>
+    <tr>
+    <th>Nombre Pieza</th>
+    <th>Cantidad</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%@pedido.componentes_mueble_unicos.each do |componente|%>
+          <tr>
+            <td><%=componente.pieza.nombre%></td>
+            <td><%=@pedido.total_pieza(componente.pieza)%></td>
+          </tr>
+      <% end %>
+    </tbody>
+</table>
+<!--Puerta-->
+<hr/>
+<% @pedido.dame_puertas_pedido%>
+<p>Puertas</p>
+<table>
+  <thead>
+    <tr>
+    <th>Nombre Pieza</th>
+    <th>Cantidad</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%@pedido.dame_puertas_unicas.each do |componente|%>
+          <tr>
+            <td><%=componente.pieza.nombre%></td>
+            <td><%=@pedido.total_puertas(componente.pieza)%></td>
+          </tr>
+      <% end %>
+    </tbody>
+</table>
 
-
+<!--Puerta-->
+<hr/>
+<% @pedido.dame_herrajes_pedido%>
+<p>Puertas</p>
+<table>
+  <thead>
+    <tr>
+    <th>Nombre Pieza</th>
+    <th>Cantidad</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%@pedido.dame_herrajes_unicas.each do |componente|%>
+          <tr>
+            <td><%=componente.pieza.nombre%></td>
+            <td><%=@pedido.total_herrajes(componente.pieza)%></td>
+          </tr>
+      <% end %>
+    </tbody>
+</table>
 
  <!--Visualización en tablas de cara a la impresión-->
 
@@ -37,9 +94,11 @@
   <li><a href="#puertas" data-toggle="tab">Puertas</a></li>
   <li><a href="#herrajes" data-toggle="tab">herrajes</a></li>
 </ul>
+
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active in" id="cascos">
   </br>
+
             <!--Detalle de piezas-->
 <div class="panel panel-primary">
   <div class="panel-heading">

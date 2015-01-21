@@ -1,5 +1,16 @@
 <%= form_for @pieza, :html => { :class => 'form-horizontal' } do |f| %>
-
+<% if @pieza.errors.any? %>
+<ul>
+    <div class="form-group">
+     <div class="col-lg-2"></div>
+      <div class="col-lg-6">
+  <% @pieza.errors.full_messages.each do |msg| %>
+              <li class="text-danger"> <%= msg %></li>
+  <% end %>
+   </div>
+  </div>
+</ul>
+<% end %>
   <div class="form-group">
     <%= f.label 'Nombre de la pieza', :class => 'control-label col-lg-2' %>
      <div class="col-lg-6">

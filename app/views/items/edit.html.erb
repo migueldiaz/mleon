@@ -1,3 +1,10 @@
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+  <li><%=link_to 'Inicio',root_path%></li>
+  <li><%=link_to 'Pedidos',pedidos_path%></li>
+  <li><%=link_to @item.pedido.cliente.nombre.concat(" - ").concat(@item.pedido.fecha),@item.pedido%></li>
+    <li class='active'>Editar producto del pedido</li>
+</ul>
+
 
 <div class="page-header">
   <h1>Editar item del pedido</h1>

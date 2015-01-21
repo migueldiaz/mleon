@@ -4,6 +4,9 @@ class Mueble < ActiveRecord::Base
   has_many :modelos, dependent: :destroy
   has_many :piezas, :through => :componentes
 
-  validates :nombre, presence: true,length: { minimum: 4}
-  validates :clase, presence: true
+  
+  validates :clase, :presence => {:message => " del modelo no puede estar en blanco"}
+  validates :nombre, :presence=> {:message => "del mueble no puede estar en blanco"}
+  validates :nombre, :uniqueness=> {:message => "del mueble no puede repetirse en la base de datos"}
+    
 end

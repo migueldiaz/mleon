@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
   belongs_to :pedido
   belongs_to :modelo
 
-  validates :pieza_id, :presence=> {:message => "no puede estar en blanco"}
+  validates :modelo_id, :presence=> {:message => "no puede estar en blanco"}
   validates :cantidad, :presence=> {:message => "debe ser un valor numérico"}
   #autocomplete :modelo, :nombre
   

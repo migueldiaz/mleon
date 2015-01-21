@@ -14,6 +14,7 @@
       <th width="150">Fecha del pedido</th>
       <th>Cliente</th>
       <th>Items</th>
+      <th>Estado</th>
       <th >Acciones</th>
     </tr>
   </thead>
@@ -21,8 +22,9 @@
     <% @pedidos.each do |pedido| %>
       <tr>
         <td><%= pedido.fecha%></td>
-        <td><%=link_to pedido.cliente.nombre,pedido.cliente %></td>
-        <td><span class='badge'><%=pedido.modelos.sum('cantidad')%></span>&nbsp;&nbsp;<%=link_to 'Añadir items al pedido',new_pedido_item_path(pedido),:class=>'btn btn-primary btn-xs'%></td>
+        <td><%=link_to pedido.cliente.nombre.concat(' - ').concat(pedido.cliente.CIF),pedido.cliente %></td>
+        <td><span class='badge'><%=pedido.modelos.sum('cantidad')%></span>&nbsp;&nbsp;</td>
+        <td><span class="<%=selector_estado(pedido.estado)%>"><%= pedido.estado%></span></td>
         <td width="100">
               <div class="btn-group">
                 <a href="<%=pedido_path(pedido)%>" class="btn btn-primary">Ver</a>

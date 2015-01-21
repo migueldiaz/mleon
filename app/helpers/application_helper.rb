@@ -6,4 +6,13 @@ module ApplicationHelper
   		end
   		return coleccion
   	end
+  	def selector_estado(estado)
+  		if estado=='Tomado'
+  			return 'text-info'
+  		elsif estado=='En producción'
+  			return 'text-warning'
+  		else
+  			return 'text-success'
+  		end
+  	end
 end

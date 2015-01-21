@@ -7,7 +7,23 @@
 
 
 <div class="page-header">
-  <h1>Detalles del pedido<%=link_to 'Orden de trabajo',desglose_show_path(:id=>@pedido),:class=>'btn btn-primary pull-right'%></h1>
+  <h1>Detalles del pedido
+  <div class="btn-group pull-right">
+                <%=link_to 'Ver orden de trabajo',desglose_show_path(:id=>@pedido),:class=>'btn btn-primary'%>
+                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<%=edit_pedido_path(@pedido)%>">Editar el pedido</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Borrar el pedido', @pedido,
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer. Los items de este cliente también se eliminarán' },:class=>"" %></li>
+                </ul>
+            </div>
+
+
+
+</h1>
 </div>
 <!--Información general del pedido-->
 <div class="panel panel-primary">
@@ -19,13 +35,10 @@
           <dt><strong>Cliente</strong></dt>
           <dd><%= link_to @pedido.cliente.nombre,@pedido.cliente%></dd>
           <dt><strong>Fecha</strong></dt>
-          <dd><%= @pedido.fecha%> <%= link_to 'Eliminar',
-                    pedido_path(@pedido),
-                    :method => 'delete',
-                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Estás seguro? Esto no se puede deshacer')) },
-                    :class => 'btn btn-danger btn-xs pull-right' %></dd>
+          <dd><%= @pedido.fecha%> </dd>
+           <dt><strong>Estado</strong></dt>
+          <dd><span class="<%=selector_estado(@pedido.estado)%>"><%= @pedido.estado%></span> </dd>
         </dl>
-  
   </div>
 </div>
 <!-- Items del pedido-->

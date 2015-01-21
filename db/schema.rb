@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119184309) do
+ActiveRecord::Schema.define(version: 20150121122817) do
 
   create_table "clases", force: :cascade do |t|
     t.string   "nombre",      limit: 255
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20150119184309) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "fecha",      limit: 255
+    t.string   "estado",     limit: 255
   end
 
   add_index "pedidos", ["cliente_id"], name: "index_pedidos_on_cliente_id", using: :btree

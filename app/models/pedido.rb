@@ -7,6 +7,9 @@ class Pedido < ActiveRecord::Base
   has_many :muebles, :through => :modelos
   has_many :componentes, :through => :modelos
  
+
+  validates :cliente_id, :presence=> {:message => "no puede estar en blanco"}
+  
   #-------------------------------------
   def dame_puertas_pedido
     componentes_puerta=Componente.none

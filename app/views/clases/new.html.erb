@@ -1,6 +1,13 @@
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+    <li><%=link_to 'Inicio',pedidos_path%></li>
+    <li><%=link_to 'Familias',clases_path%></li>
+  <li class="active">Nueva familia</li>
+</ul>
+
+
+
 <%- model_class = Clase -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
-                                 :default => "New #{model_class.model_name.human}") %></h1>
+  <h1>Nuevo</h1>
 </div>
 <%= render :partial => 'form' %>

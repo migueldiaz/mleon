@@ -1,27 +1,32 @@
-
+<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+    <li><%=link_to 'Inicio',pedidos_path%></li>
+    <li><%= link_to @item.pedido.cliente.nombre.concat(" - ").concat(@item.pedido.fecha),@item.pedido %></li>
+    <li class='active'><%=@item.modelo.nombre%></li>
+<ul>
 
 <%- model_class = Item -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Detalles del item</h1>
 </div>
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:pedido_id) %>:</strong></dt>
-  <dd><%= @item.pedido_id %></dd>
+  <dd><%= @item.pedido.cliente.nombre %> - <%=@item.pedido.fecha%></dd>
   <dt><strong><%= model_class.human_attribute_name(:modelo_id) %>:</strong></dt>
-  <dd><%= @item.modelo_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cantidad) %>:</strong></dt>
+  <dd><%= @item.modelo.nombre %></dd>
+  <dt><strong>Unidades:</strong></dt>
   <dd><%= @item.cantidad %></dd>
-</dl>
-
+  <dt></dt>
+  <dd>
+    
+    <br/>
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              pedido_items_path(@pedido), :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_item_path(@item), :class => 'btn btn-primary' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              item_path(@item),
+  <%= link_to 'Editar',edit_item_path(@item), :class => 'btn btn-primary' %>
+  <%= link_to 'Borrar', @item,
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :data => { :confirm => '¿Estás seguro? Esto no se puede deshacer' },
               :class => 'btn btn-danger' %>
 </div>
+  </dd>
+</dl>
+

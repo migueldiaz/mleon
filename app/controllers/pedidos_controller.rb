@@ -29,6 +29,8 @@ class PedidosController < ApplicationController
 
     respond_to do |format|
       if @pedido.save
+        @pedido.fecha=@pedido.created_at.strftime('%d/%m/%y - %H:%M')
+        @pedido.save
         format.html { redirect_to @pedido, notice: 'Pedido was successfully created.' }
         format.json { render :show, status: :created, location: @pedido }
       else

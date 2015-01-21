@@ -12,14 +12,7 @@
   </div>
 </ul>
 <% end %>
- <div class="form-group">
- 	<div class='col-lg-2'></div>
- 	<div class="col-lg-6">
- 		<div class="well">
-           <i> Una vez se guarda el pedido se pueden añadir los elementos</i>
- 		</div>
- 	</div>
-</div>
+ 
  
    		<div class="form-group">
          <%= f.label 'Cliente', :class => 'control-label col-lg-2' %>
@@ -27,12 +20,7 @@
          <%= f.collection_select(:cliente_id, Cliente.all, :id, :nombre, {:prompt => 'Elige el cliente'},{:class=>'form-control'}) %>
         </div>
       </div> 
-     <div class="form-group">
-         <%= f.label 'Fecha', :class => 'control-label col-lg-2' %>
-        <div class="col-lg-6">
-         <%= f.text_field :fecha, :class =>'form-control',:value=>Time.now.utc.in_time_zone("Madrid").strftime('%d/%m/%y - %H:%M'),:readonly=>:true %>
-        </div>
-      </div> 
+     
  <div class="form-group">
          <%= f.label 'Estado', :class => 'control-label col-lg-2' %>
        <div class="col-lg-6">
@@ -47,4 +35,17 @@
     <%= link_to 'Cancelar',pedidos_path, :class => 'btn' %>
     </div>
   </div>
+
+  <div class="form-group">
+  <div class='col-lg-2'></div>
+  <div class="col-lg-6">
+    <div class="well">
+      <ul>
+           <li><i> Una vez se guarda el pedido se pueden añadir los elementos</i></li>
+           <li><i>La <b>fecha y hora</b> del pedido se generan automáticamente al guardar el pedido</i></li>
+      <ul>
+    </div>
+  </div>
+</div>
+
 <% end %>

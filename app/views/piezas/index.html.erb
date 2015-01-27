@@ -1,4 +1,4 @@
-<ul class="breadcrumb">Estás en: &nbsp;&nbsp;
+<ul class="breadcrumb hidden-print">Estás en: &nbsp;&nbsp;
  <li><%=link_to 'Inicio',root_path%></li>
   <li class='active'>Piezas</li>
 </ul>
@@ -7,7 +7,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %> <%= link_to 'Crear una pieza',
             new_pieza_path,
-            :class => 'btn btn-primary pull-right' %></h1>
+            :class => 'btn btn-primary pull-right hidden-print' %></h1>
  
 </div>
 <script type="text/javascript">
@@ -50,7 +50,7 @@
         <td><%= pieza.descripcion %></td>
 
          <td width="100">
-              <div class="btn-group">
+              <div class="btn-group hidden-print">
                 <a href="<%=pieza_path(pieza)%>" class="btn btn-primary">Ver</a>
                 <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <span class="caret"></span></a>

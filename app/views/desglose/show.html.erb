@@ -1,3 +1,4 @@
+<div class='hidden-print'>
 <ul class="breadcrumb">Estás en: &nbsp;&nbsp;
     <li><%=link_to 'Inicio',root_path%></li>
     <li><%=link_to 'Clientes',clientes_path%></li>
@@ -7,13 +8,16 @@
     <li class="active">Desglose</li>
 </ul>
 
+</div>
 
 
-
-<h1>Desglose del pedido</h1>
+<h1>Orden de trabajo</h1>
+  <hr/>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Datos del pedido</h3>
+
+  
   </div>
   <div class="panel-body">
         <dl class="dl-horizontal">
@@ -28,7 +32,7 @@
 
  <!--Visualización en tablas de cara a la impresión-->
 
- <ul class="nav nav-tabs">
+ <ul class="nav nav-tabs hidden-print">
   <li class="active"><a href="#cascos" data-toggle="tab">Cascos</a></li>
   <li><a href="#puertas" data-toggle="tab">Puertas</a></li>
   <li><a href="#herrajes" data-toggle="tab">Herrajes</a></li>
@@ -92,8 +96,8 @@
                 <tr> 
                   <th>Total</th>
                   <th>Nombre de la pieza</th>
-                
-                  
+                   <th>Alto</th>
+                   <th>Ancho</th>
                 </tr>
               </thead>
               <tbody>
@@ -101,6 +105,8 @@
                      <tr>
                     <td width="50"><span class='badge'><%=@pedido.total_para_modelos(componente.pieza)%></span></td>
                     <td><%=componente.pieza.nombre%></td>
+                     <td><%=componente.pieza.alto%></td>
+                      <td><%=componente.pieza.ancho%></td>
                   </tr>
                   <%end%>
               </tbody>

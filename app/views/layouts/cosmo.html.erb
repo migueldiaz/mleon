@@ -24,7 +24,7 @@
    
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,14 +37,14 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav pullright">
-            <!--<li class="active"><a href="#">Home</a></li>-->
+            <!--<li class="active"><a href="#">Home</a></li>
              <li><%=link_to 'Inicio',root_path,:class=>'active'%></li>
             <li><%=link_to 'Clientes',clientes_path,:class=>''%></li>
             <li><%=link_to 'Pedidos',pedidos_path,:class=>''%></li>
             <li class='active'><%=link_to 'Muebles',muebles_path,:class=>''%></li>
             <li><a href="<%=modelos_path%>">Modelos <span class="badge"><%=Modelo.all.count%></span></a></li>
             <li><%=link_to 'Familias',clases_path,:class=>''%></li>
-            <li><%=link_to 'Piezas',piezas_path,:class=>''%></li>
+            <li><%=link_to 'Piezas',piezas_path,:class=>''%></li>-->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -55,16 +55,26 @@
        <div class="row" >
           <br/>   
        </div>
-       <div class="row">
-         <div class="col-md-2">
-        <!--
+       <div class="row ">
+         <div class="col-md-2 hidden-print">
+
             <div class="panel panel-primary">
               <div class="panel-heading">
-               <h3 class="panel-title">Administración</h3>
+               <h3 class="panel-title">Navegación</h3>
               </div>
             <div class="panel-body">
-           Desde este panel lateral se añaden los muebles, modelos y piezas a la base de datos, los links superiores son exclusivamente para consulta.
-        </div>-->
+          
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class=<%=controladorActivo('mleon')%>><%=link_to 'Inicio',root_path%></li>
+                        
+                        <li  class=<%=controladorActivo('pedidos')%>><a href="<%=pedidos_path%>">Pedidos&nbsp;&nbsp; <span class="badge"><%=Pedido.all.where("estado!='entregado'").count%></span></a></li>
+                        <li class=<%=controladorActivo('clientes')%>><%=link_to 'Clientes',clientes_path%></li>
+                        <li class=<%=controladorActivo('muebles')%>><%=link_to 'Muebles',muebles_path%></li>
+                        <li class=<%=controladorActivo('modelos')%>><%=link_to 'Modelos',modelos_path%></li>
+                        <li class=<%=controladorActivo('piezas')%>><%=link_to 'Piezas',piezas_path%></li>
+                        <li class=<%=controladorActivo('clases')%>><%=link_to 'Familias',clases_path%></li>
+                  </ul>
+        </div>
 </div>
 
          </div>

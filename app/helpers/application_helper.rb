@@ -15,4 +15,12 @@ module ApplicationHelper
   			return 'text-success'
   		end
   	end
+
+    def controladorActivo(texto)
+      if params[:controller]==texto
+        return 'active'
+      else
+         return ''
+      end
+    end
 end

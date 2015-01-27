@@ -31,7 +31,8 @@ class MueblesController < ApplicationController
       if @mueble.save
         @modelo = @mueble.modelos.new
         @modelo.nombre = 'Base'
-        @modelo.descripcion= 'Este modelo usa las mismas piezas que el mueble al que pertenece, se crea automáticamente al crear el mueble' 
+        @modelo.codigo=@mueble.nombre.concat('-BASE')
+        @modelo.descripcion= 'Modelo BASE automático (creado al crear el mueble base)' 
         @modelo.save
         format.html { redirect_to @mueble, notice: 'Se ha creado el mueble correctamente' }
         format.json { render :show, status: :created, location: @mueble }

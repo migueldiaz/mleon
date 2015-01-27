@@ -52,14 +52,18 @@
               <thead>
                 <tr> 
                   <th>Total</th>
-                  <th>Nombre de la pieza</th>  
+                  <th>Nombre de la pieza</th> 
+                  <th>Alto</th> 
+                  <th>Ancho</th> 
                 </tr>
               </thead>
               <tbody>
                  <%@pedido.componentes_mueble_unicos.each do |componente|%>
                   <tr>
-                    <td width="50"><span class='badge'><%=@pedido.total_pieza(componente.pieza)%></span></td>
+                    <td width="50"><span class='badge'><%=@pedido.total_cascos(componente.pieza)%></span></td>
                     <td><%=componente.pieza.nombre%></td>
+                     <td><%=componente.pieza.alto%></td>
+                      <td><%=componente.pieza.ancho%></td>
                   </tr>
               <% end %>
               </tbody>
@@ -95,7 +99,7 @@
               <tbody>
                    <%@pedido.dame_puertas_unicas.each do |componente|%>
                      <tr>
-                    <td width="50"><span class='badge'><%=@pedido.total_puertas(componente.pieza)%></span></td>
+                    <td width="50"><span class='badge'><%=@pedido.total_para_modelos(componente.pieza)%></span></td>
                     <td><%=componente.pieza.nombre%></td>
                   </tr>
                   <%end%>
@@ -128,7 +132,7 @@
               <tbody>
                    <%@pedido.dame_herrajes_unicas.each do |componente|%>
                      <tr>
-                    <td width="50"><span class='badge'><%=@pedido.total_herrajes(componente.pieza)%></span></td>
+                    <td width="50"><span class='badge'><%=@pedido.total_para_modelos(componente.pieza)%></span></td>
                     <td><%=componente.pieza.nombre%></td>
                   </tr>
                   <%end%>

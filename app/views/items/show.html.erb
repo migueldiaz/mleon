@@ -11,13 +11,14 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:pedido_id) %>:</strong></dt>
-  <dd><%= @item.pedido.cliente.nombre %> - <%=@item.pedido.fecha%></dd>
+  <dd><%= @item.pedido.cliente.nombre %></dd>
   <dt><strong><%= model_class.human_attribute_name(:modelo_id) %>:</strong></dt>
-  <dd><%= @item.modelo.nombre %></dd>
+  <dd><%= link_to @item.modelo.nombre, @item.modelo%></dd>
   <dt><strong>Unidades:</strong></dt>
   <dd><%= @item.cantidad %></dd>
   <dt></dt>
   <dd>
+   
     
     <br/>
 <div class="form-actions">
@@ -29,4 +30,48 @@
 </div>
   </dd>
 </dl>
+<h4>Piezas del mueble base</h4>
+ <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="50">Cantidad</th>
+                <th>Nombre de la pieza</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+              <% @item.modelo.mueble.componentes.each do |componente| %>
+                <tr>
+                   <td class='pull-right'><span class="badge"><%= componente.cantidad %></span></td>
+                  <td><%=  componente.pieza.nombre %></td>
+                 
+                 <!-- <td><%=l componente.pieza.created_at %></td>-->
+                  <td>
+                 
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+<h4>Piezas específicas del modelo</h4>
+ <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="50">Cantidad</th>
+                <th>Nombre de la pieza</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+              <% @item.modelo.componentes.each do |componente| %>
+                <tr>
+                   <td class='pull-right'><span class="badge"><%= componente.cantidad %></span></td>
+                  <td><%=  componente.pieza.nombre %></td>
+                 
+                 <!-- <td><%=l componente.pieza.created_at %></td>-->
+                  <td>
+                 
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
 

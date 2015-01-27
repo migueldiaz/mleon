@@ -5,7 +5,7 @@ class PiezasController < ApplicationController
   # GET /piezas.json
   def index
     #@piezas = Pieza.all
-    @piezas = Pieza.all.order(:nombre).paginate(:page =>  params[:page], :per_page => 10)
+    @piezas = Pieza.all.order(:nombre)#.paginate(:page =>  params[:page], :per_page => 10)
   end
 
   # GET /piezas/1

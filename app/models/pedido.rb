@@ -10,6 +10,8 @@ class Pedido < ActiveRecord::Base
 
   validates :cliente_id, :presence=> {:message => "no puede estar en blanco"}
   
+  #-------------
+
   #-------------------------------------
   def dame_puertas_pedido
     componentes_puerta=Componente.none
@@ -21,14 +23,16 @@ class Pedido < ActiveRecord::Base
   def dame_puertas_unicas
     return self.dame_puertas_pedido.uniq{|x| x.pieza_id}
   end
-  def total_puertas(pieza)
-      suma=0
-      self.dame_puertas_pedido.each do |componente|
-        if componente.pieza==pieza
-          suma=suma+componente.cantidad
-        end
+
+
+  def dame_multiplicador(nombre_pieza)
+    total=0
+    self.items.each do |item|
+      if item.modelo.componentes.where(:nombre=>nombre_pieza)
+        total=total+item.cantidad
       end
-      return suma;
+    end
+    return total
   end
 
   #-------------------------------------
@@ -77,4 +81,38 @@ class Pedido < ActiveRecord::Base
       return suma;
   end
   #----------------------------------------------
-end
+  def total_cascos(pieza)
+    total=0
+
+    self.items.each do |item|
+       item.componentes_mueble.each do |componente|
+            if pieza.id==componente.pieza.id
+              total= total + item.cantidad * componente.cantidad
+            end
+        end
+    end
+
+    return total
+  end
+
+ #---------------------------------------------------------
+ def total_para_modelos(pieza)
+    total=0
+
+    self.items.each do |item|
+       item.modelo.componentes.each do |componente|
+            if pieza==componente.pieza
+              total= total + item.cantidad * componente.cantidad
+            end
+        end
+    end
+
+    return total
+  end
+
+
+
+
+
+ #------------------------------------------------
+ end

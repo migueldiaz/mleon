@@ -1,4 +1,4 @@
-<div class='hidden-print'>
+<div class='hidden-print'> 
 <ul class="breadcrumb">Estás en: &nbsp;&nbsp;
     <li><%=link_to 'Inicio',root_path%></li>
     <li><%=link_to 'Clientes',clientes_path%></li>
@@ -11,7 +11,9 @@
 </div>
 
 
-<h1>Orden de trabajo</h1>
+
+<h1>Orden de trabajo </h1>
+<h3 class='visible-print'><span class='pull-rigth'>Fecha de emisión: <%=Time.now.strftime('%d/%m/%y - %H:%M')%></span></h3>
   <hr/>
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -20,12 +22,22 @@
   
   </div>
   <div class="panel-body">
-        <dl class="dl-horizontal">
-          <dt><strong>Cliente</strong></dt>
-          <dd><%= @pedido.cliente.nombre%> - <%= @pedido.cliente.CIF%> &nbsp;&nbsp;<b>Teléfono:</b> <%=@pedido.cliente.telefono%></dd>
-          <dt><strong>Fecha</strong></dt>
+        <dl class="dl-horizontal hidden-print">
+          <dt><strong>Nombre del cliente:&nbsp;</strong></dt>
+          <dd><%= @pedido.cliente.nombre%></dd>
+          <dt><strong>Fecha del pedido:&nbsp;</strong></dt>
           <dd><%= @pedido.fecha%></dd>
         </dl>
+        <table class='visible-print'>
+        <tr>
+          <th><strong>Nombre del cliente:</strong></th>
+          <td><%= @pedido.cliente.nombre%></td>
+        </tr>
+        <tr>
+          <th><strong>Fecha del pedido:</strong></th>
+          <td><%= @pedido.fecha%></td>
+        </tr>
+        </table>
   
   </div>
   </div>
@@ -45,12 +57,13 @@
             <!--Detalle de piezas-->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Piezas de tipo CASCO</h3>
+    <h3 class="panel-title">Piezas de tipo CASCO
+    <span class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.componentes_mueble_unicos.count%></span></span></h3>
   </div>
   <div class="panel-body">
      
         <!--Aqui la cuenta de piezas-->
-      <p class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.componentes_mueble_unicos.count%></span></p>
+      
    
       <table class="table table-striped">
               <thead>
@@ -84,12 +97,12 @@
               <!--Aqui las piezas de tipo  puerta-->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Piezas de tipo PUERTA</h3>
+    <h3 class="panel-title">Piezas de tipo PUERTA  <span class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.dame_puertas_unicas.count%></span></h3>
   </div>
   <div class="panel-body">
        
      <!--Aqui la cuenta de piezas-->
-      <p class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.dame_puertas_unicas.count%>
+    
     
       <table class="table table-striped">
               <thead>
@@ -121,12 +134,12 @@
                 <!--Aqui las piezas de ti herraje-->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Piezas de tipo HERRAJE</h3>
+    <h3 class="panel-title">Piezas de tipo HERRAJE<span class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.dame_herrajes_unicas.count%></span></h3>
   </div>
   <div class="panel-body">
     <br/>
          <!--Aqui la cuenta de piezas-->
-          <p class='pull-right'>Tipos de piezas usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.dame_herrajes_unicas.count%>
+          
       <% if @herrajes.nil?%>
       <table class="table table-striped">
               <thead>

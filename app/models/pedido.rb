@@ -10,7 +10,9 @@ class Pedido < ActiveRecord::Base
 
   validates :cliente_id, :presence=> {:message => "no puede estar en blanco"}
   
+  
   #-------------
+
 
   #-------------------------------------
   def dame_puertas_pedido
@@ -21,7 +23,7 @@ class Pedido < ActiveRecord::Base
     return componentes_puerta
   end
   def dame_puertas_unicas
-    return self.dame_puertas_pedido.uniq{|x| x.pieza_id}
+    return self.dame_puertas_pedido.uniq{|x| x.pieza_id}.sort {|a,b| b.pieza.nombre <=> a.pieza.nombre }
   end
 
 
@@ -44,7 +46,7 @@ class Pedido < ActiveRecord::Base
     return componentes_herraje
   end
   def dame_herrajes_unicas
-    return self.dame_herrajes_pedido.uniq{|x| x.pieza_id}
+    return self.dame_herrajes_pedido.uniq{|x| x.pieza_id}.sort {|a,b| b.pieza.nombre <=> a.pieza.nombre }
   end
   def total_herrajes(pieza)
       suma=0
@@ -67,8 +69,9 @@ class Pedido < ActiveRecord::Base
   end
   #-------------------------------------
   def componentes_mueble_unicos
-    
-  	return self.componentes_mueble.uniq{|x| x.pieza_id}
+    @componentes=self.componentes_mueble.uniq{|x| x.pieza_id}
+    @componentes.sort {|a,b| b.pieza.nombre <=> a.pieza.nombre }
+  	return @componentes
   end
   #------------------------------------------
   def total_pieza(pieza)

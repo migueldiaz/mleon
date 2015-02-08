@@ -1,7 +1,7 @@
 <ul class="breadcrumb">Estás en: &nbsp;&nbsp;
     <li><%=link_to 'Inicio',pedidos_path%></li>
     <li><%= link_to @item.pedido.cliente.nombre.concat(" - ").concat(@item.pedido.fecha),@item.pedido %></li>
-    <li class='active'><%=@item.modelo.nombre%></li>
+    <li class='active'><%=@item.modelo.mueble.nombre.concat(" - ").concat(@item.modelo.nombre)%></li>
 <ul>
 
 <%- model_class = Item -%>
@@ -13,7 +13,7 @@
   <dt><strong><%= model_class.human_attribute_name(:pedido_id) %>:</strong></dt>
   <dd><%= @item.pedido.cliente.nombre %></dd>
   <dt><strong><%= model_class.human_attribute_name(:modelo_id) %>:</strong></dt>
-  <dd><%= link_to @item.modelo.nombre, @item.modelo%></dd>
+  <dd><%= link_to @item.modelo.mueble.nombre, @item.modelo%></dd>
   <dt><strong>Unidades:</strong></dt>
   <dd><%= @item.cantidad %></dd>
   <dt></dt>

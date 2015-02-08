@@ -4,4 +4,6 @@ class Componente < ActiveRecord::Base
   belongs_to :mueble
 
   validates :cantidad, :presence=> {:message => "debe ser un valor numérico"}
+
+
 end

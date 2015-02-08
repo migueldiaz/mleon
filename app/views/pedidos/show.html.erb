@@ -60,7 +60,7 @@
                 <% @pedido.items.each do |item| %>
                   <tr>
                     <td width="20"><span class='badge'><%= item.cantidad%></span></td>
-                    <td><%=link_to item.modelo.nombre,item_path(item) %></td>
+                    <td><%=link_to item.modelo.mueble.nombre.concat(" - ").concat(item.modelo.nombre),item_path(item) %></td>
                       <td width="100">
               <div class="btn-group">
                 <a href="<%=item_path(item)%>" class="btn btn-primary">Ver</a>

@@ -46,7 +46,7 @@ class Pedido < ActiveRecord::Base
     return componentes_herraje
   end
   def dame_herrajes_unicas
-    return self.dame_herrajes_pedido.uniq{|x| x.pieza_id}.sort {|a,b| b.pieza.nombre <=> a.pieza.nombre }
+    return self.dame_herrajes_pedido.uniq{|x| x.pieza_id}.sort {|a,b| a.pieza.nombre <=> b.pieza.nombre }
   end
   def total_herrajes(pieza)
       suma=0
@@ -69,9 +69,7 @@ class Pedido < ActiveRecord::Base
   end
   #-------------------------------------
   def componentes_mueble_unicos
-    @componentes=self.componentes_mueble.uniq{|x| x.pieza_id}
-    @componentes.sort {|a,b| b.pieza.nombre <=> a.pieza.nombre }
-  	return @componentes
+    return self.componentes_mueble.uniq{|x| x.pieza_id}.sort {|a,b| a.pieza.nombre <=> b.pieza.nombre }
   end
   #------------------------------------------
   def total_pieza(pieza)

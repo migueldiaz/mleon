@@ -6,6 +6,8 @@ gem 'will_paginate-bootstrap'
 gem  'jquery-tablesorter'
 gem 'rails4-autocomplete'
 
+gem 'jquery-datatables-rails'
+
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'
 

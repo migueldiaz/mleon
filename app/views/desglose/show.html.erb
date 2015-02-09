@@ -61,15 +61,68 @@
     <span class='pull-right'>Tipos de pieza usados:&nbsp;&nbsp;<span class='badge'><%=@pedido.componentes_mueble_unicos.count%></span></span></h3>
   </div>
   <div class="panel-body">
-     
-        <!--Aqui la cuenta de piezas-->
-      
+     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+
+        <style type="text/css">
+
+              .sorting_asc {
+  padding-right:18px;
+  cursor: pointer;
+  background:  url(<%= image_tag('sort_desc.png')%>) no-repeat top right;
+}
+
+.sorting_desc {
+  padding-right:18px;
+  cursor: pointer;
+  background: url(<%= image_tag('sort_desc.png')%>) no-repeat top right;
+}
+
+.sorting {
+  padding-right:18px;
+  cursor: pointer;
+  background: url(<%=image_tag('sort_both.png')%>) no-repeat top right;
+}
+
+.sorting_asc_disabled {
+  padding-right:18px;
+  cursor: pointer;
+  background: url(<%=image_tag('sort_asc_disabled.png')%>) no-repeat top right;
+}
+
+.sorting_desc_disabled {
+  padding-right:18px;
+  cursor: pointer;
+  background: url('<%=image_tag('sort_desc_disabled.png')%>) no-repeat top right;
+}
+
+table.dataTable th>div.DataTables_sort_wrapper {
+  position: relative;
+  white-space: nowrap;
+}
+table.dataTable th > div.DataTables_sort_wrapper > span.DataTables_sort_icon.css_right {
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  vertical-align: top;
+}
+
+        </style>
+
+        <script type="text/javascript">
+            $(document).ready( function () {
+              $('.table').DataTable( {
+              "dom": 'R',
+              "bSort": true
+               } );
+          } );
+        </script>
+
    
-      <table class="table table-striped">
+      <table id='example' class="table table-striped datatable">
               <thead>
                 <tr> 
-                  <th>Total</th>
-                  <th>Nombre de la pieza</th> 
+                  <th data-column-index="0" class='sorting'>Total</th>
+                  <th class='sorting'>Nombre de la pieza</th> 
                   <th>Alto</th> 
                   <th>Ancho</th> 
                 </tr>
@@ -114,7 +167,7 @@
                 </tr>
               </thead>
               <tbody>
-                   <%@pedido.dame_puertas_unicas.each do |componente|%>
+                   <%@pedido.dame_puertas_unicas.sort {|a,b| a.pieza.nombre <=> b.pieza.nombre }.each do |componente|%>
                      <tr>
                     <td width="50"><span class='badge'><%=@pedido.total_para_modelos(componente.pieza)%></span></td>
                     <td><%=componente.pieza.nombre%></td>

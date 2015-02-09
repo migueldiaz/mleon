@@ -19,7 +19,11 @@
   </head>
   <body>
 
-
+     <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "cosmo" %>
+    <%= yield(:page_javascript) if content_for?(:page_javascript) %>
      
    
 
@@ -84,10 +88,6 @@
          
       </div>
     </div> <!-- /container -->
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "cosmo" %>
-    <%= yield(:page_javascript) if content_for?(:page_javascript) %>
+   
   </body>
 </html>

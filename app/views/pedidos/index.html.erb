@@ -15,7 +15,7 @@
       <th>Cliente</th>
       <th>Items</th>
       <th>Estado</th>
-      <th >Acciones</th>
+      <th width='150'>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -25,13 +25,14 @@
         <td><%=link_to pedido.cliente.nombre.concat(' - ').concat(pedido.cliente.CIF),pedido.cliente %></td>
         <td><span class='badge'><%=pedido.modelos.sum('cantidad')%></span>&nbsp;&nbsp;</td>
         <td><span class="<%=selector_estado(pedido.estado)%>"><%= pedido.estado%></span></td>
-        <td width="100">
-              <div class="btn-group">
-                <a href="<%=pedido_path(pedido)%>" class="btn btn-primary">Ver</a>
+        <td >
+              <div class="btn-group pull-right" width="100">
+                <a href="<%=pedido_path(pedido)%>" class="btn btn-primary">Ver pedido</a>
                 <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="<%=edit_pedido_path(pedido)%>">Editar</a></li>
+                  <li><%=link_to 'Ver orden de trabajo',desglose_show_path(:id=>pedido)%></li>
+                  <li><a href="<%=edit_pedido_path(pedido)%>">Editar el pedido</a></li>
                   <li class="divider"></li>
                   <li><%= link_to 'Borrar el pedido', pedido,
                          method: :delete,

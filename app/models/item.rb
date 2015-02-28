@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   belongs_to :pedido
   belongs_to :modelo
+  belongs_to :ped_modelo
 
   validates :modelo_id, :presence=> {:message => "no puede estar en blanco"}
   validates :cantidad, :presence=> {:message => "debe ser un valor numérico"}

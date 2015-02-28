@@ -12,17 +12,23 @@
   </div>
 </ul>
 <% end %>
-
-  <% if !@modelo.mueble.nil?%>
-      <div class="form-group">
+    <div class="form-group">
+    
+    <div class="well hidden-print col-lg-8">
+      <ul>
+           <li><i> Elige el <b>mueble base</b> </i> del modelo. El modelo tendrá las piezas de tipo casco del mueble elegido</li>
+           
+      </ul>
+    </div>
+    </div>
+    <div class="form-group">
          <%= f.label 'Mueble base', :class => 'control-label col-lg-2' %>
         <div class="col-lg-6">
-         <%= f.text_field :mueble, :class => 'form-control',:disabled=>:true,:value=>@modelo.mueble.nombre %>
+         <%= f.collection_select(:mueble_id, Mueble.all, :id, :nombre, {:prompt => 'Elige el mueble base'},{:class=>'form-control'}) %>
         </div>
-      </div> 
 
-  <%end%>
-  
+      </div> 
+  <hr/>
   <div class="form-group">
     <%= f.label 'Nombre del modelo', :class => 'control-label col-lg-2' %>
      <div class="col-lg-6">
@@ -35,16 +41,9 @@
     <%= f.text_field :codigo, :class => 'form-control' %>
     </div>
   </div>
-  <!---->
-  <% if @modelo.mueble.nil?%>
-      <div class="form-group">
-         <%= f.label 'Mueble base', :class => 'control-label col-lg-2' %>
-        <div class="col-lg-6">
-         <%= f.collection_select(:mueble_id, Mueble.all, :id, :nombre, {:prompt => 'Elige el mueble base'},{:class=>'form-control'}) %>
-        </div>
-      </div> 
-  <%end%>
-  <!---->
+
+      
+
 
   <div class="form-group">
     <%= f.label 'Descripción', :class => 'control-label col-lg-2' %>
@@ -65,7 +64,7 @@
      <div class="col-lg-2"></div>
       <div class="col-lg-6">
     <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), modelos_path, :class => 'btn' %>
+  
     </div>
   </div>
 <% end %>

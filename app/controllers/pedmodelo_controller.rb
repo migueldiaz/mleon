@@ -1,0 +1,2 @@
+class PedmodeloController < ApplicationController
+end

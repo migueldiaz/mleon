@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codigo: MyString
+  nombre: MyString
+  alto: 1
+  ancho: 1
+  fondo: 1
+  descripcion: MyText
+  modelo_id: 
+
+two:
+  codigo: MyString
+  nombre: MyString
+  alto: 1
+  ancho: 1
+  fondo: 1
+  descripcion: MyText
+  modelo_id: 

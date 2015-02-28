@@ -37,7 +37,7 @@
     <% @modelos.each do |modelo| %>
       <tr>
         <td><%= modelo.codigo %></td>
-        <td width="300"><%=link_to modelo.mueble.nombre.concat("-").concat(modelo.nombre),modelo%> </td>
+        <td width="300"><%=link_to modelo.nombre,modelo%> </td>
        
         <td><%= modelo.mueble.alto %></td>
         <td><%= modelo.mueble.ancho %></td>

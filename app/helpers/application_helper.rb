@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Dynaspan::ApplicationHelper
 	def totalpuertas(items)
     	coleccion=Componente.none
     	items.each do|total|

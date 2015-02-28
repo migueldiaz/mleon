@@ -1,0 +1,173 @@
+<dl class="dl-horizontal">
+              <dt>Código:</strong></dt>
+              <dd><%= @modelo.codigo %></dd>
+            
+              <dt><strong>Mueble base: </strong></dt>
+              <dd><%= link_to @modelo.mueble.nombre,mueble_path(@modelo.mueble) %></dd>
+              <!--<dt>Piezas del modelo base:</strong></dt>
+              <dd> <span class="badge"><%= @modelo.mueble.piezas.count %></span></dd>
+              <dt>Total de piezas del modelo base:</strong></dt>
+              <dd> <span class="badge"><%= @modelo.mueble.componentes.sum('cantidad') %></span></dd>-->
+              
+              <dt>Alto</dt>
+              <dd><%= @modelo.mueble.alto %></dd>
+              <dt>Ancho</dt>
+              <dd><%= @modelo.mueble.ancho %></dd>
+              <dt><strong>Fondo:</strong></dt>
+              <dd><%= @modelo.mueble.fondo %></dd>
+
+              <dt><strong>Descripción</strong></dt>
+              <dd><%= @modelo.descripcion %></dd>  
+              </dl>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Piezas base</h3>
+  </div>
+  <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="50">Cantidad</th>
+                <th>Nombre de la pieza</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+              <% @modelo.mueble.componentes.each do |componente| %>
+                <tr>
+                   <td class='pull-right'><span class="badge"><%= componente.cantidad %></span></td>
+                  <td><%= link_to componente.pieza.nombre, pieza_path(componente.pieza) %></td>
+                 
+                 <!-- <td><%=l componente.pieza.created_at %></td>-->
+                 
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <!--Fin-->
+  </div>
+  </div>
+
+
+    <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Piezas del modelo</h3>
+  </div>
+  <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="50">Cantidad</th>
+                <th>Nombre de la pieza</th>
+                <th>
+                  <button type="button" class="btn btn-primary  pull-right" data-toggle="modal" data-target="#myModal">
+                    Añadir piezas
+                 </button>
+                </th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @modelo.componentes.each do |componente| %>
+                <tr>
+                   <td class='pull-right'><span class="badge"><%= componente.cantidad %></span></td>
+                  <td><%= link_to componente.pieza.nombre, pieza_path(componente.pieza) %></td>
+                 
+                 <!-- <td><%=l componente.pieza.created_at %></td>-->
+                  <td>
+                    <%= link_to 'Borrar la pieza', [componente.modelo, componente],
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <!--Fin-->
+  </div>
+  </div>
+
+<!--**********************************************-->
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#info" data-toggle="tab">Información del modelo</a></li>
+  <li><a href="#piezas" data-toggle="tab">Piezas del modelo</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="info">
+  
+          <br/>
+          <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Nombre del modelo: <%= @modelo.nombre %></h3>
+          </div>
+          <div class="panel-body">
+              <dl class="dl-horizontal">
+              <dt>Código:</strong></dt>
+              <dd><%= @modelo.codigo %></dd>
+              <hr/>
+              <dt><strong>Mueble base: </strong></dt>
+              <dd><%= link_to @modelo.mueble.nombre,mueble_path(@modelo.mueble) %></dd>
+              <dt>Piezas del modelo base:</strong></dt>
+              <dd> <span class="badge"><%= @modelo.mueble.piezas.count %></span></dd>
+              <dt>Total de piezas del modelo base:</strong></dt>
+              <dd> <span class="badge"><%= @modelo.mueble.componentes.sum('cantidad') %></span></dd>
+              
+              <dt>Alto</dt>
+              <dd><%= @modelo.mueble.alto %></dd>
+              <dt>Ancho</dt>
+              <dd><%= @modelo.mueble.ancho %></dd>
+              <dt><strong>Fondo:</strong></dt>
+              <dd><%= @modelo.mueble.fondo %></dd>
+              <hr/>
+              <dt><strong>Descripción</strong></dt>
+              <dd><%= @modelo.descripcion %></dd>  
+              </dl>
+          </div>
+</div>
+  </div>
+  <div class="tab-pane fade" id="piezas">
+   
+                     
+                       <br/>
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Piezas del modelo</h3>
+  </div>
+  <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="50">Cantidad</th>
+                <th>Nombre de la pieza</th>
+                <th>
+                  <button type="button" class="btn btn-primary  pull-right" data-toggle="modal" data-target="#myModal">
+                    Añadir piezas
+                 </button>
+                </th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @modelo.componentes.each do |componente| %>
+                <tr>
+                   <td class='pull-right'><span class="badge"><%= componente.cantidad %></span></td>
+                  <td><%= link_to componente.pieza.nombre, pieza_path(componente.pieza) %></td>
+                 
+               
+                  <td>
+                    <%= link_to 'Borrar la pieza', [componente.modelo, componente],
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+         -
+  </div>
+  </div>
+  </div>
+ <!--**********************************************-->
+
+
+
+

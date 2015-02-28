@@ -7,7 +7,10 @@ gem  'jquery-tablesorter'
 gem 'rails4-autocomplete'
 
 gem 'jquery-datatables-rails'
+#gem 'bootstrap-editable-rails'
+gem 'best_in_place'
 
+gem 'dynaspan'
 # twitter bootstrap helpers gem, e.g., alerts etc...
 gem 'twitter-bootswatch-rails-helpers'
 

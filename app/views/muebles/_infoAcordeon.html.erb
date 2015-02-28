@@ -1,0 +1,120 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+         <b>Información</b> del mueble:
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+             
+            
+              <dt><strong>Mueble base: </strong></dt>
+              <dd><%= link_to @mueble.nombre,mueble_path(@mueble) %></dd>
+              <!--<dt>Piezas del mueble base:</strong></dt>
+              <dd> <span class="badge"><%= @mueble.piezas.count %></span></dd>
+              <dt>Total de piezas del mueble base:</strong></dt>
+              <dd> <span class="badge"><%= @mueble.componentes.sum('cantidad') %></span></dd>-->
+              
+              <dt>Alto</dt>
+              <dd><%= @mueble.alto %></dd>
+              <dt>Ancho</dt>
+              <dd><%= @mueble.ancho %></dd>
+              <dt><strong>Fondo:</strong></dt>
+              <dd><%= @mueble.fondo %></dd>
+
+              <dt><strong>Descripción</strong></dt>
+              <dd><%= @mueble.descripcion %></dd>
+              <hr/>
+             <dt>Familia:</dt>  
+              <dd><%=@mueble.clase.nombre%></dd>
+          </dl>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <b>Piezas</b> del mueble: 
+        </a>
+        &nbsp;&nbsp;<span class="badge"><%= @mueble.componentes.count %></span>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+            <!---->
+            <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="50">Cantidad</th>
+                <th>Nombre de la pieza</th>
+                <th>
+                  <button type="button" class="btn btn-primary  pull-right" data-toggle="modal" data-target="#myModal">
+                    Añadir piezas
+                 </button>
+                </th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @mueble.componentes.each do |componente| %>
+                <tr>
+                   <td class='pull-right'><span class="badge"><%= componente.cantidad %></span></td>
+                  <td><%= link_to componente.pieza.nombre, pieza_path(componente.pieza) %></td>
+                 
+                 <!-- <td><%=l componente.pieza.created_at %></td>-->
+                  <td>
+                    <%= link_to 'Borrar la pieza', [componente.mueble, componente],
+                         method: :delete,
+                         data: { confirm: '¿Estás seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <b>Modelos</b> que usan este mueble como <b>base</b>
+        </a>
+        &nbsp;&nbsp;<span class="badge"><%= @mueble.modelos.count %></span>
+      </h4>
+
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+             <div class="well">
+                  <i><b>Modelos</b> que usan este mueble como base</i>
+            </div>
+
+              <table class="table table-striped">
+            <thead>
+              <tr >
+               <th>Código</th>
+                <th>Nombre del modelo</th>
+                <th>Descripcíon</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @mueble.modelos.each do |modelo| %>
+                <tr>
+                  <td><%= modelo.codigo %></td>
+                  <td><%= link_to modelo.nombre, modelo %></td>
+                  <td><%= modelo.descripcion %></td>
+               
+                 
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

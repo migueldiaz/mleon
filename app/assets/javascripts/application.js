@@ -26,3 +26,9 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/extras/dataTables.responsive
 //= require dataTables/extras/TableTools
+//= require jquery_ujs
+//= require bootstrap
+//= require best_in_place
+//= require best_in_place.jquery-ui
+//= require dynaspan/dynaspan
+//= require_tree 

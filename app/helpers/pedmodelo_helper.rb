@@ -1,0 +1,2 @@
+module PedmodeloHelper
+end

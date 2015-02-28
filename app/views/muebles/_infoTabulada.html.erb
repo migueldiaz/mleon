@@ -1,0 +1,96 @@
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#info" data-toggle="tab" aria-expanded="false">Información del mueble</a></li>
+    <li class=""><a href="#piezas" data-toggle="tab" aria-expanded="true">Piezas del mueble</a></li>
+    <li class=""><a href="#modelos" data-toggle="tab" aria-expanded="true">Modelos del mueble</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="info">
+   
+  <br/>
+                    <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= @mueble.nombre %></h3>
+              
+            </div>
+            <div class="panel-body">
+                  <dl class="dl-horizontal">
+                <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
+                <dd><%= @mueble.nombre %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
+                <dd><%= @mueble.descripcion %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:alto) %>:</strong></dt>
+                
+                <dd><%= @mueble.alto %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:ancho) %>:</strong></dt>
+                <dd><%= @mueble.ancho %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:fondo) %>:</strong></dt>
+                <dd><%= @mueble.fondo %></dd>
+                <dt><strong><%= model_class.human_attribute_name(:categoría) %>:</strong></dt>
+                <% if !@mueble.clase.nil?%> <dd><%= @mueble.clase.nombre %></dd><%end%>
+              </dl>
+               
+            </div>
+          </div>
+  </div>
+  <div class="tab-pane fade " id="piezas">
+           <br/>
+        
+            <table class="table table-striped">
+            <thead>
+              <tr  class="success">
+               
+                <th><%= model_class.human_attribute_name(:nombre) %></th>
+                <th><%= model_class.human_attribute_name(:cantidad) %></th>
+               
+                <th>
+                  <button type="button" class="btn btn-primary  pull-right" data-toggle="modal" data-target="#myModal">
+                  Añadir piezas
+          </button>
+                
+            </thead>
+            <tbody>
+              <% @mueble.componentes.each do |componente| %>
+                <tr>
+                  
+                  <td><%= link_to componente.pieza.nombre, pieza_path(componente.pieza) %></td>
+                  <td><span class="badge"><%= componente.cantidad %></span></td>
+                 
+                  <td>
+                    
+                    <%= link_to 'Borrar piezas', [componente.mueble, componente],
+                         method: :delete,
+                         data: { confirm: '¿Está seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+  </div>
+  <div class="tab-pane fade" id="modelos">
+            <br/>
+            <table class="table table-striped">
+            <thead>
+              <tr  class="success">
+                <th>Modelo</th>
+                <th>Descripcción</th>
+                <th> <%= link_to 'Añadir modelo', new_mueble_modelo_path(@mueble),:class=>"btn btn-primary pull-right" %> </th>
+            </thead>
+            <tbody>
+              <% @mueble.modelos.each do |modelo| %>
+                <tr>
+                  
+                  <td><%= link_to modelo.nombre, modelo_path(modelo) %></td>
+                  <td><%= modelo.descripcion %></td>
+                  <td>
+                    
+                    <%= link_to 'Borrar el modelo', [modelo.mueble, modelo],
+                         method: :delete,
+                         data: { confirm: '¿Está seguro? Esta acción no se puede deshacer' },:class=>"btn btn-danger btn-xs pull-right" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+  </div>
